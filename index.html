@@ -864,11 +864,11 @@ const DATA = {
    "kind": "렌터카",
    "date": "9/19~9/23",
    "name": "Jeep Compass 또는 동급 CFAR / Europcar·FOX",
-   "loc": "SFO / FOX 서비스",
-   "inn": "9/19 09:00",
-   "outt": "9/23 21:00",
-   "pay": "결제 완료 / 현장 US$0 / 보증금 Hold (금액은 바우처 확인)",
-   "memo": "무제한 마일리지·Full-to-Full / CDW·대인대물·도난 자기부담금 0 / Liability 보상한도 확인 / 영문면허증 인정"
+   "loc": "FOX Rent A Car / SFO Rental Car Center · 반납 내비 Access Rd 8, San Francisco, CA 94128",
+   "inn": "9/19 09:00 · 예약 41088404 / 확인 1206197265",
+   "outt": "9/23 21:00 · 20:00~20:30 반납 목표",
+   "pay": "현장 US$0 / 보증금 약 ₩536,153 신용카드 Hold",
+   "memo": "Europcar 예약·FOX 서비스 / 무제한 마일리지·Full-to-Full / 차량손해·대인대물·도난 자기부담금 0 / Liability 보상한도 확인 / 영문면허증 인정 / 귀국 e-ticket 준비"
   },
   {
    "kind": "호텔",
@@ -1275,7 +1275,7 @@ const DATA = {
    "cat": "차량",
    "item": "QEEQ/FOX 바우처·영문면허·실물 신용카드·귀국 e-ticket",
    "due": "출국 전",
-   "memo": "보증금 약 금액 비공개 한도 확보 / IDP 불필요(이번 계약 조건)"
+   "memo": "보증금 약 ₩536,153 이상 여유 한도 확보 / IDP 불필요(이번 계약 조건)"
   },
   {
    "cat": "Yosemite",
@@ -1377,11 +1377,11 @@ const DATA = {
   },
   {
    "cat": "렌터카",
-   "item": "QEEQ/FOX 바우처·확인번호 저장 (바우처 참조)",
+   "item": "QEEQ/FOX 바우처·예약 41088404·확인 1206197265 저장",
    "dad": "●",
    "son": "",
    "when": "출국 전",
-   "memo": "예약번호는 바우처 참조"
+   "memo": "전자바우처+오프라인 캡처 준비"
   },
   {
    "cat": "렌터카",
@@ -2182,16 +2182,66 @@ function viewShop(){
       구매 완료</label></div>`).join('');
   return html;
 }
+
+function viewLive(){
+  const live=[
+    ['Yosemite 공식 현황','Tioga Road · Glacier Point Road · 공원 Alerts · 공사','https://www.nps.gov/yose/planyourvisit/conditions.htm','NPS'],
+    ['Yosemite 교통','Valley 혼잡 · 입구 대기 · 주차 상황','https://www.nps.gov/yose/planyourvisit/traffic.htm','NPS'],
+    ['Yosemite 날씨','Valley와 High Country 출발 전 예보 확인','https://www.nps.gov/yose/planyourvisit/weather.htm','NPS / NWS'],
+    ['Yosemite 웹캠','출발 전 실제 하늘·시야 확인','https://www.nps.gov/yose/learn/photosmultimedia/webcams.htm','NPS'],
+    ['Caltrans QuickMap','실시간 교통 · 사고 · 도로 폐쇄 · 공사','https://quickmap.dot.ca.gov/','Caltrans'],
+    ['CA Highway 120','Highway 120 최신 도로 조건','https://roads.dot.ca.gov/?roadnumber=120','Caltrans'],
+    ['SF 날씨','9/24 Golden Gate 라이딩 전 바람·기온 확인','https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194','NWS']
+  ];
+  const maps=[
+    ['SFO Rental Car Center','https://www.google.com/maps/search/?api=1&query=SFO+Rental+Car+Center'],
+    ['Housekeeping Camp','https://www.google.com/maps/search/?api=1&query=Housekeeping+Camp+Yosemite'],
+    ['Curry Village','https://www.google.com/maps/search/?api=1&query=Curry+Village+Yosemite'],
+    ['Olmsted Point','https://www.google.com/maps/search/?api=1&query=Olmsted+Point+Yosemite'],
+    ['Tenaya Lake','https://www.google.com/maps/search/?api=1&query=Tenaya+Lake+Yosemite'],
+    ['Tuolumne Meadows','https://www.google.com/maps/search/?api=1&query=Tuolumne+Meadows+Yosemite'],
+    ['Tioga Pass','https://www.google.com/maps/search/?api=1&query=Tioga+Pass+Yosemite'],
+    ['Glacier Point','https://www.google.com/maps/search/?api=1&query=Glacier+Point+Yosemite'],
+    ['San Francisco Premium Outlets','https://www.google.com/maps/search/?api=1&query=San+Francisco+Premium+Outlets+Livermore'],
+    ['Best Western Silicon Valley Inn','https://www.google.com/maps/search/?api=1&query=Best+Western+Silicon+Valley+Inn+Sunnyvale'],
+    ['Stanford Visitor Center','https://www.google.com/maps/search/?api=1&query=Stanford+Visitor+Center'],
+    ['Computer History Museum','https://www.google.com/maps/search/?api=1&query=Computer+History+Museum+Mountain+View'],
+    ['FOX 렌터카 반납','https://www.google.com/maps/search/?api=1&query=Access+Rd+8+San+Francisco+CA+94128'],
+    ['Blazing Saddles Hyde St','https://www.google.com/maps/search/?api=1&query=2715+Hyde+St+San+Francisco'],
+    ['Golden Gate Bridge','https://www.google.com/maps/search/?api=1&query=Golden+Gate+Bridge'],
+    ['Sausalito Ferry','https://www.google.com/maps/search/?api=1&query=Sausalito+Ferry+Terminal'],
+    ['San Francisco Marriott Marquis','https://www.google.com/maps/search/?api=1&query=780+Mission+St+San+Francisco'],
+    ['Oracle Park','https://www.google.com/maps/search/?api=1&query=Oracle+Park+San+Francisco']
+  ];
+  let html=`<h2>LIVE · 현지 컨디션</h2><p class="lede">출발 전 1분 점검. 저장된 상태보다 공식 사이트의 당일 정보를 우선합니다.</p>`;
+  html+=`<div class="card flag"><h3>9/20 Yosemite 출발 전</h3>${checklist([
+    {id:'live-tioga',text:'Tioga Road OPEN 확인',due:'당일 아침',memo:'NPS Current Conditions에서 확인'},
+    {id:'live-glacier',text:'Glacier Point Road OPEN 확인',due:'당일 아침',memo:'NPS Current Conditions에서 확인'},
+    {id:'live-weather',text:'비·뇌우·기온 확인',due:'당일 아침',memo:'High Country는 Valley보다 훨씬 춥습니다'},
+    {id:'live-fuel',text:'연료 · 물 · 간식 확인',due:'출발 전',memo:'Tioga Road 구간 서비스 제한'}
+  ])}</div>`;
+  html+=`<h2>공식 실시간 정보</h2>`+live.map(x=>`<div class="card"><h3>${esc(x[0])}</h3><p style="margin:-3px 0 10px;color:var(--soft);font-size:14px">${esc(x[1])} · ${esc(x[3])}</p><a class="lnk" href="${x[2]}" target="_blank" rel="noopener">공식 페이지 열기 ↗</a></div>`).join('');
+  html+=`<div class="card"><h3>전화로 Yosemite 도로 확인</h3>${dl([['전화','209-372-0200 → 1 → 1'],['용도','Tioga / Glacier Point 등 가장 최신 도로 상태 확인']])}<a class="lnk" href="tel:+12093720200">전화 걸기</a></div>`;
+  html+=`<h2>Google Maps 바로가기</h2><p class="lede">목적지를 다시 검색하지 않고 바로 지도를 엽니다.</p><div class="card"><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">${maps.map(x=>`<a class="lnk" style="margin:0;text-align:center" href="${x[1]}" target="_blank" rel="noopener">${esc(x[0])}</a>`).join('')}</div></div>`;
+  html+=`<div class="card"><h3>판단 원칙</h3>${dl([['9/20','Tioga/Glacier Point 중 폐쇄·악천후가 있으면 Plan B로 전환'],['9/24','비 또는 강풍이면 Golden Gate 라이딩을 무리하지 않기'],['도로','Google Maps는 길찾기용, 폐쇄·공사는 NPS/Caltrans 공식정보 우선'],['마지막 확인','Yosemite는 NPS 전화 안내가 가장 최신일 수 있음']])}</div>`;
+  return html;
+}
+
+function viewDrive(){
+  let html=`<h2>운전 · 결제</h2><p class="lede">렌터카 픽업부터 반납까지 현장에서 바로 보는 핵심 원칙입니다.</p>`;
+  html+=`<div class="card flag"><h3>FOX 렌터카 핵심</h3>${dl([['예약','QEEQ 41088404 / 확인 1206197265'],['차량','Jeep Compass 또는 동급 · 무제한 마일리지'],['보험','차량손해·대인대물·도난 자기부담금 0'],['보증금','약 ₩536,153 · 주 운전자 실물 신용카드 Hold'],['연료','Full-to-Full'],['면허','한국 영문운전면허증 인정'],['반납','9/23 20:00~20:30 목표 · 계약 21:00'],['반납 내비','Access Rd 8, San Francisco, CA 94128']])}</div>`;
+  html+=DATA.driveTips.map(t=>`<div class="tip-card${t.status==='필수'?' flag':''}">
+    <div class="hd"><span class="kind ${t.status==='필수'?'gg':'pine'}">${esc(t.cat)}</span><span class="kind">${esc(t.status)}</span></div>
+    <p class="pt">${esc(t.point)}</p>${dl([['이번 여행',t.apply],['현장 확인',t.check,1]])}</div>`).join('');
+  return html;
+}
 function viewPrep(){
   const dep=DATA.departCheck.map((d,i)=>({id:'dc'+i,text:`${d.cat} · ${d.item}`,due:d.due,memo:d.memo}));
   const pr=DATA.prep.map((p,i)=>({id:'pp'+i,text:`${p.cat} · ${p.item}`,due:p.when,
     memo:[p.dad?'아빠':'',p.son?'아들':''].filter(Boolean).join('·')+(p.memo?' / '+p.memo:'')}));
   let html=`<h2>출발 전 최종 체크</h2>`+bar(dep.filter(x=>gv('chk/'+x.id)).length,dep.length)+checklist(dep);
   html+=`<h2>사전 준비물</h2>`+bar(pr.filter(x=>gv('chk/'+x.id)).length,pr.length)+checklist(pr);
-  html+=`<h2>운전·결제 원칙</h2><p class="lede">현장에서 되묻는 문장까지 함께 적었습니다.</p>`;
-  html+=DATA.driveTips.map(t=>`<div class="tip-card${t.status==='필수'?' flag':''}">
-    <div class="hd"><span class="kind ${t.status==='필수'?'gg':'pine'}">${esc(t.cat)}</span><span class="kind">${esc(t.status)}</span></div>
-    <p class="pt">${esc(t.point)}</p>${dl([['이번 여행',t.apply],['현장 확인',t.check,1]])}</div>`).join('');
+  html+=`<div class="card"><h3>운전·결제는 별도 탭</h3><p style="margin:0;color:var(--soft);font-size:14px">FOX 보험·보증금·톨·주유·반납 핵심은 상단 <b>운전</b> 탭에서 확인하세요.</p></div>`;
   return html;
 }
 function viewPrepSon(){
@@ -2220,7 +2270,7 @@ function viewTalk(){
 /* ---------- shell ---------- */
 const TABS_DAD=[['today','오늘',viewTodayDad],['sched','일정',viewSched],['book','예약',viewBooking],
   ['spot','스팟',viewSpots],['food','먹기',viewFood],['burger','버거',viewBurger],['shop','쇼핑',viewShop],
-  ['exp','비용',viewExpense],['prep','준비',viewPrep],['talk','회화',viewTalk],
+  ['exp','비용',viewExpense],['live','LIVE',viewLive],['drive','운전',viewDrive],['prep','준비',viewPrep],['talk','회화',viewTalk],
   ['log','기록',viewLog],['mis','미션',viewMission]];
 const TABS_SON=[['today','오늘',viewTodaySon],['mis','미션',viewMission],['sched','일정',viewSched],
   ['burger','버거',viewBurger],['exp','비용',viewExpense],['talk','회화',viewTalk],
@@ -2240,7 +2290,7 @@ function render(){
   updateStatus();
   document.getElementById('foot').innerHTML =
     '체크·점수·한마디는 각 폰에 저장됩니다. 두 폰의 기록은 기록 탭에서 합칠 수 있습니다.<br>'
-    + '예약번호와 금액은 이 페이지에 넣지 않았습니다 — 바우처 메일을 확인하세요.';
+    + '중요 예약번호·렌터카 조건은 오프라인에서도 볼 수 있게 저장했습니다. 최종 계약은 원본 바우처를 우선하세요.';
 }
 function go(tab){cur=tab;render();window.scrollTo({top:0});}
 
