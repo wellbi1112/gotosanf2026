@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>아빠와 아들, 캘리포니아 9일</title>
+<meta name="theme-color" content="#2C5B49">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="미국여행">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --granite:#E7E8E3; --paper:#fff; --ink:#1B241F; --soft:#616B64; --faint:#8C958E;
+  --line:#D2D5CD; --pine:#2C5B49; --gg:#C0362C; --gold:#9A6E12; --steel:#3B5A86;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --disp:"Gothic A1","IBM Plex Sans KR","Apple SD Gothic Neo",sans-serif;
+  --pad:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--granite);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%;padding-bottom:40px}
+.wrap{max-width:760px;margin:0 auto;padding:0 var(--pad)}
+a{color:var(--pine)}
+button{font-family:inherit}
+:focus-visible{outline:2.5px solid var(--gg);outline-offset:2px}
+
+/* ---------- role gate ---------- */
+.gate{position:fixed;inset:0;z-index:80;background:var(--pine);color:#F2F3EE;
+  display:flex;flex-direction:column;justify-content:center;padding:26px;overflow-y:auto}
+.gate[hidden]{display:none}
+.gate h1{font-family:var(--disp);font-weight:900;font-size:30px;line-height:1.12;margin:0 0 6px}
+.gate p{color:#BFCDC5;font-size:14px;margin:0 0 26px}
+.gate .pick{display:grid;gap:12px;max-width:420px}
+.gate button{background:#F2F3EE;border:0;border-radius:4px;padding:18px 20px;text-align:left;cursor:pointer;color:var(--ink)}
+.gate button b{font-family:var(--disp);font-weight:800;font-size:20px;display:block}
+.gate button span{font-size:13px;color:var(--soft)}
+
+/* ---------- masthead ---------- */
+.mast{background:var(--pine);color:#F2F3EE;padding:20px 0 18px}
+.mast h1{font-family:var(--disp);font-weight:900;font-size:clamp(25px,7vw,38px);
+  line-height:1.08;letter-spacing:-.018em;margin:0}
+.mast .sub{margin:7px 0 0;font-size:13px;color:#BFCDC5}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+.stamp{display:inline-flex;align-items:baseline;gap:7px;background:var(--gg);color:#fff;
+  border-radius:2px;padding:4px 10px 5px;font-family:var(--disp);font-weight:800;font-size:13px}
+.stamp b{font-size:17px;line-height:1}
+.stamp:empty{display:none}
+.who{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#F2F3EE;
+  border-radius:20px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.sync{font-size:11.5px;color:#9FB3A9;margin:8px 0 0}
+
+/* ---------- tabs ---------- */
+.tabbar{position:sticky;top:0;z-index:30;background:var(--granite);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:0 var(--pad);max-width:760px;margin:0 auto}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;
+  padding:13px 11px 10px;font-size:14.5px;font-weight:600;color:var(--soft);cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--gg)}
+
+/* ---------- spine ---------- */
+.spine{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+  margin:0 calc(-1*var(--pad));padding:2px var(--pad) 6px}
+.spine::-webkit-scrollbar{display:none}
+.spine button{flex:0 0 auto;width:60px;background:var(--paper);border:1px solid var(--line);
+  border-top:4px solid var(--rc,var(--soft));border-radius:3px;padding:7px 4px 8px;cursor:pointer;text-align:center;color:var(--ink)}
+.spine .wd{font-size:11px;color:var(--faint)}
+.spine .dd{font-family:var(--disp);font-weight:800;font-size:16px;line-height:1.2;display:block}
+.spine .rg{font-size:9.5px;color:var(--soft);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.spine button[aria-current=true]{background:var(--pine);border-color:var(--pine);color:#fff}
+.spine button[aria-current=true] .wd,.spine button[aria-current=true] .rg{color:#C3D2CA}
+.spine button.today{box-shadow:inset 0 0 0 2px var(--gg)}
+
+/* ---------- blocks ---------- */
+section{padding:20px 0 10px}
+h2{font-family:var(--disp);font-weight:800;font-size:21px;letter-spacing:-.01em;margin:26px 0 10px}
+h2:first-of-type{margin-top:4px}
+h3.sub{font-family:var(--disp);font-weight:800;font-size:17px;margin:22px 0 8px}
+.lede{color:var(--soft);font-size:13.5px;margin:-4px 0 14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:15px 16px;margin-bottom:10px}
+.card.flag{border-left:4px solid var(--gg)}
+.card h3{font-family:var(--disp);font-weight:800;font-size:16.5px;margin:0 0 8px}
+.kind{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 7px;border-radius:2px;background:#EDEFE9;color:var(--soft);margin-right:6px}
+.kind.pine{background:#E4EDE8;color:var(--pine)}
+.kind.gg{background:#F7E7E4;color:var(--gg)}
+.kind.gold{background:#F4EDDC;color:var(--gold)}
+.kind.steel{background:#E6EBF3;color:var(--steel)}
+
+.hero{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--gg);border-radius:4px;padding:18px;margin-bottom:12px}
+.hero .date{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:-.02em;margin:0}
+.hero .head{color:var(--soft);font-size:13px;margin:0 0 4px}
+.keys{margin:14px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.keys li{border-bottom:1px solid var(--line);padding:11px 0 11px 30px;position:relative;font-size:16px;font-weight:600;line-height:1.4}
+.keys li span{position:absolute;left:0;top:11px;font-family:var(--disp);font-weight:800;color:var(--gg)}
+.quote{margin:14px 0 0;font-family:var(--disp);font-weight:700;font-size:15px;color:var(--pine)}
+
+.dl{display:grid;grid-template-columns:78px 1fr;gap:4px 10px;font-size:14px;margin:0}
+.dl dt{color:var(--faint);font-size:12.5px;padding-top:2px}
+.dl dd{margin:0}
+.dl dd.b{color:var(--gg)}
+
+.tl{position:relative;margin:0;padding:0 0 0 68px;list-style:none}
+.tl:before{content:"";position:absolute;left:58px;top:8px;bottom:14px;width:1px;background:var(--line)}
+.tl li{position:relative;margin-bottom:12px}
+.tl .t{position:absolute;left:-68px;width:58px;text-align:right;font-size:11.5px;color:var(--soft);line-height:1.35;padding-top:14px}
+.tl li:before{content:"";position:absolute;left:-14px;top:19px;width:9px;height:9px;border-radius:50%;background:var(--pine);border:2px solid var(--granite)}
+.tl .card{margin:0}
+.tl h3{font-size:15.5px;margin-bottom:9px;font-weight:700;font-family:var(--sans);line-height:1.4}
+
+.chk{background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.chk label{display:grid;grid-template-columns:22px 1fr;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer;align-items:start}
+.chk label:last-child{border-bottom:0}
+.chk input{width:19px;height:19px;margin:2px 0 0;accent-color:var(--pine)}
+.chk .it{font-size:14.5px;font-weight:500;line-height:1.4}
+.chk .mt{font-size:12.5px;color:var(--soft);margin-top:2px;display:block}
+.chk .due{font-size:11.5px;color:var(--gg);font-weight:600}
+.chk input:checked ~ .tx .it{color:var(--faint);text-decoration:line-through}
+.bar{height:6px;background:#DADCD5;border-radius:3px;overflow:hidden;margin:0 0 6px}
+.bar i{display:block;height:100%;background:var(--pine);transition:width .3s}
+.barlab{font-size:12.5px;color:var(--soft);margin-bottom:14px}
+.lnk{display:inline-block;margin-top:5px;font-size:12.5px;font-weight:600;color:var(--pine)}
+
+details.spot{background:var(--paper);border:1px solid var(--line);border-radius:4px;margin-bottom:8px}
+details.spot summary{padding:13px 15px;cursor:pointer;font-family:var(--disp);font-weight:800;font-size:16px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+details.spot summary::-webkit-details-marker{display:none}
+details.spot summary:after{content:"＋";color:var(--faint);font-weight:400}
+details.spot[open] summary:after{content:"－"}
+details.spot .body{padding:0 15px 15px}
+
+/* ---------- missions ---------- */
+.mis{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:0;margin-bottom:10px;overflow:hidden}
+.mis label{display:grid;grid-template-columns:24px 1fr;gap:12px;padding:14px 15px;border-bottom:1px solid var(--line);cursor:pointer;align-items:start}
+.mis label:last-child{border-bottom:0}
+.mis input{width:21px;height:21px;margin:1px 0 0;accent-color:var(--gg)}
+.mis .mtx{font-size:15px;font-weight:600;line-height:1.45}
+.mis input:checked ~ div .mtx{color:var(--faint);text-decoration:line-through}
+.mis .say{display:block;margin-top:6px;background:#F7F3E8;border-left:3px solid var(--gold);
+  padding:7px 10px;font-size:14px;font-weight:600;color:#4A3C14;border-radius:0 3px 3px 0}
+.mis .tagline{display:block;margin-top:5px;font-size:12px;color:var(--faint)}
+.stamps{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 16px}
+.stamps i{width:26px;height:26px;border:1px solid var(--line);border-radius:3px;background:var(--paper);
+  display:grid;place-items:center;font-size:12px;color:var(--faint);font-style:normal}
+.stamps i.on{background:var(--gg);border-color:var(--gg);color:#fff;font-weight:700}
+.scoreboard{background:var(--pine);color:#fff;border-radius:4px;padding:16px 18px;margin-bottom:14px}
+.scoreboard .big{font-family:var(--disp);font-weight:900;font-size:34px;line-height:1}
+.scoreboard .cap{color:#BFCDC5;font-size:13px;margin-top:4px}
+
+/* ---------- burger ---------- */
+.bg{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px 15px;margin-bottom:10px}
+.bg .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.bg h3{margin:0;font-family:var(--disp);font-weight:800;font-size:17px}
+.bg .menu{font-size:12.5px;color:var(--soft);margin:2px 0 12px}
+.score{display:grid;grid-template-columns:44px 1fr 1fr 54px;gap:8px;align-items:center;margin-bottom:7px;font-size:13px}
+.score .who2{color:var(--soft);font-weight:600}
+.score input[type=number]{width:100%;padding:7px 8px;border:1px solid var(--line);border-radius:3px;font-size:15px;font-family:inherit;text-align:center;background:#FBFBF9}
+.score input[readonly]{background:#F0F1EC;color:var(--soft)}
+.score .tot{text-align:right;font-family:var(--disp);font-weight:800;font-size:17px}
+.score .ph{font-size:10.5px;color:var(--faint);text-align:center}
+.score.mine input[type=number]{border-color:#B9BEB4;box-shadow:inset 0 0 0 1px #fff}
+.note{width:100%;margin-top:8px;padding:8px 9px;border:1px solid var(--line);border-radius:3px;font-family:inherit;font-size:13.5px;background:#FBFBF9}
+.champ{background:var(--pine);color:#fff;border-radius:4px;padding:16px 18px;margin-bottom:14px}
+.champ .row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(255,255,255,.18);padding:8px 0;font-size:14px}
+.champ .row:last-child{border:0}
+.champ b{font-family:var(--disp);font-weight:800;font-size:16px}
+.champ .empty{color:#BFCDC5;font-size:13.5px}
+
+/* ---------- log ---------- */
+.log{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px 15px;margin-bottom:10px}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.log .d{font-family:var(--disp);font-weight:800;font-size:16px}
+.log .slot{margin-bottom:9px}
+.log .lab{font-size:11.5px;color:var(--faint);margin-bottom:3px}
+.log textarea{width:100%;min-height:54px;padding:9px 10px;border:1px solid var(--line);border-radius:3px;
+  font-family:inherit;font-size:14px;line-height:1.5;background:#FBFBF9;resize:vertical}
+.log textarea[readonly]{background:#F0F1EC;color:var(--soft)}
+.log .said{background:#F0F1EC;border-radius:3px;padding:9px 10px;font-size:14px;color:var(--ink);white-space:pre-wrap}
+.log .none{color:var(--faint);font-size:13px}
+
+.ph-card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:13px 15px;margin-bottom:8px}
+.ph-card .en{font-size:15.5px;font-weight:600;line-height:1.45;margin:0}
+.ph-card .ko{font-size:13.5px;color:var(--soft);margin:4px 0 0}
+.ph-card .tip{font-size:12.5px;color:var(--pine);margin:6px 0 0}
+.mission{display:inline-block;margin-top:8px;background:#F4EDDC;color:var(--gold);font-size:12px;font-weight:600;padding:3px 8px;border-radius:2px}
+.tip-card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:13px 15px;margin-bottom:8px}
+.tip-card .hd{display:flex;gap:8px;align-items:baseline;margin-bottom:6px}
+.tip-card .pt{font-weight:600;font-size:14.5px;line-height:1.4;margin:0 0 6px}
+.foot{color:var(--faint);font-size:12px;text-align:center;padding:26px 0 10px;line-height:1.6}
+.mini{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:8px 15px;
+  font-size:13px;font-weight:600;color:var(--pine);cursor:pointer;margin:0 6px 10px 0}
+.io{width:100%;min-height:74px;padding:9px 10px;margin:0 0 9px;border:1px solid var(--line);
+  border-radius:3px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+  line-height:1.45;background:#FBFBF9;resize:vertical;word-break:break-all}
+
+/* ---------- 지출 ---------- */
+.sum{background:var(--pine);color:#fff;border-radius:4px;padding:16px 18px;margin-bottom:12px}
+.sum .big{font-family:var(--disp);font-weight:900;font-size:32px;line-height:1.05}
+.sum .cap{color:#BFCDC5;font-size:12.5px;margin-top:5px}
+.sum .krw{font-size:15px;color:#DCE5E0;margin-top:2px}
+.form{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px 15px;margin-bottom:14px}
+.form .row{display:grid;gap:8px;margin-bottom:9px}
+.form .row.two{grid-template-columns:1fr 84px}
+.form label.lab{display:block;font-size:11.5px;color:var(--faint);margin:0 0 4px}
+.form input[type=text],.form input[type=number],.form select,.form textarea{
+  width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:3px;
+  font-family:inherit;font-size:15px;background:#FBFBF9;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:#F2F3EE;border:1px solid var(--line);border-radius:16px;padding:7px 12px;
+  font-size:13px;font-weight:500;color:var(--soft);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--pine);border-color:var(--pine);color:#fff;font-weight:600}
+.shotpick{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
+.shotpick label{background:var(--paper);border:1px dashed var(--soft);border-radius:3px;padding:10px 14px;
+  font-size:13.5px;font-weight:600;color:var(--pine);cursor:pointer}
+.shotpick input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.shotpick img{width:52px;height:52px;object-fit:cover;border-radius:3px;border:1px solid var(--line)}
+.shotpick .st{font-size:12px;color:var(--soft)}
+.btn{background:var(--gg);color:#fff;border:0;border-radius:3px;padding:12px 18px;
+  font-family:var(--disp);font-weight:800;font-size:15px;cursor:pointer;width:100%}
+.exp{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin-bottom:8px;
+  display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:start}
+.exp .th{width:54px;height:54px;border-radius:3px;border:1px solid var(--line);object-fit:cover;background:#F2F3EE;cursor:zoom-in}
+.exp .noth{width:54px;height:54px;border-radius:3px;border:1px dashed var(--line);display:grid;place-items:center;
+  font-size:10.5px;color:var(--faint);text-align:center;line-height:1.3}
+.exp .amt{font-family:var(--disp);font-weight:800;font-size:16px;white-space:nowrap}
+.exp .meta{font-size:12.5px;color:var(--soft);margin-top:3px;line-height:1.45}
+.exp .del{background:none;border:0;color:var(--faint);font-size:12.5px;cursor:pointer;padding:2px 0 0}
+.catbar{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:13px 15px;margin-bottom:10px}
+.catbar .ln{display:grid;grid-template-columns:1fr 62px;gap:10px;align-items:center;margin-bottom:7px;font-size:13.5px}
+.catbar .ln:last-child{margin-bottom:0}
+.catbar .tr{height:7px;background:#E7E8E3;border-radius:4px;overflow:hidden;margin-top:4px}
+.catbar .tr i{display:block;height:100%;background:var(--pine)}
+.catbar .v{text-align:right;font-family:var(--disp);font-weight:800;font-size:14px}
+.lightbox{position:fixed;inset:0;z-index:90;background:rgba(20,24,21,.94);display:grid;place-items:center;padding:14px}
+.lightbox[hidden]{display:none}
+.lightbox img{max-width:100%;max-height:82vh;border-radius:3px}
+.lightbox .cls{position:absolute;top:16px;right:16px;background:#fff;border:0;border-radius:20px;
+  padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}
+#printArea{display:none}
+@media print{
+  body>*{display:none!important}
+  #printArea{display:block!important}
+  #printArea{font-family:var(--sans);color:#000}
+  #printArea h1{font-size:18pt;margin:0 0 4pt}
+  #printArea .sub{font-size:9pt;color:#444;margin:0 0 12pt}
+  #printArea table{width:100%;border-collapse:collapse;font-size:9pt}
+  #printArea th,#printArea td{border-bottom:.5pt solid #999;padding:4pt 3pt;text-align:left;vertical-align:top}
+  #printArea td.n{text-align:right;white-space:nowrap}
+  #printArea .shots{margin-top:14pt;display:grid;grid-template-columns:1fr 1fr;gap:8pt}
+  #printArea .shots figure{margin:0;break-inside:avoid}
+  #printArea .shots img{width:100%;border:.5pt solid #bbb}
+  #printArea .shots figcaption{font-size:7.5pt;color:#333;margin-top:2pt}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media(min-width:620px){.dl{grid-template-columns:84px 1fr 84px 1fr}}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate" hidden>
+  <h1>아빠와 아들,<br>캘리포니아 9일</h1>
+  <p>이 폰은 누가 쓰나요? 보이는 화면이 달라집니다.<br>나중에 상단 배지를 눌러 바꿀 수 있습니다.</p>
+  <div class="pick">
+    <button data-role="dad"><b>아빠</b><span>일정·예약·렌터카·준비 체크까지 전부</span></button>
+    <button data-role="son"><b>아들</b><span>오늘 미션·버거 심사·기록 중심</span></button>
+  </div>
+</div>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="toprow">
+      <div class="stamp" id="stamp"></div>
+      <button class="who" id="whoBtn"></button>
+    </div>
+    <h1>아빠와 아들,<br>캘리포니아 9일</h1>
+    <p class="sub">2026.9.18 금 – 9.26 토 · 샌프란시스코 · 요세미티 · 실리콘밸리</p>
+    <p class="sync" id="sync"></p>
+  </div>
+</header>
+
+<div class="tabbar"><div class="tabs" id="tabs" role="tablist"></div></div>
+<div class="wrap" id="views"></div>
+<p class="foot" id="foot"></p>
+<div class="lightbox" id="lightbox" hidden><button class="cls" id="lbClose">닫기</button><img id="lbImg" alt="영수증"></div>
+<div id="printArea"></div>
+
+<script>
+const DATA = {
+ "schedule": [
+  {
+   "day": "9/18",
+   "time": "오후",
+   "title": "ICN → SFO / 입국·수하물",
+   "move": "항공 + 호텔 셔틀",
+   "dist": "-",
+   "park": "-",
+   "meal": "기내식 / 가벼운 저녁",
+   "book": "항공·Westin 확정",
+   "planb": "입국 지연 시 바로 호텔",
+   "memo": "첫날 관광 없음"
+  },
+  {
+   "day": "9/18",
+   "time": "저녁",
+   "title": "The Westin San Francisco Airport 체크인",
+   "move": "호텔 셔틀/Uber",
+   "dist": "-",
+   "park": "호텔",
+   "meal": "조식 불포함",
+   "book": "확정",
+   "planb": "호텔 내 식사",
+   "memo": "현장결제 $34.65 예정"
+  },
+  {
+   "day": "9/19",
+   "time": "07:30~09:00",
+   "title": "기상·체크아웃 → SFO 렌터카",
+   "move": "셔틀/Uber",
+   "dist": "-",
+   "park": "-",
+   "meal": "간단한 아침",
+   "book": "렌터카 09:00 확정",
+   "planb": "수령 지연 30~60분 허용",
+   "memo": "Jeep Compass급"
+  },
+  {
+   "day": "9/19",
+   "time": "09:30~10:15",
+   "title": "마트 장보기",
+   "move": "렌터카",
+   "dist": "약 5~10mi",
+   "park": "매장 주차",
+   "meal": "물·과일·간식·샌드위치",
+   "book": "불필요",
+   "planb": "30분으로 축소",
+   "memo": "Yosemite 식품 보관 주의"
+  },
+  {
+   "day": "9/19",
+   "time": "10:15~16:00",
+   "title": "SFO권 → Yosemite Valley",
+   "move": "렌터카",
+   "dist": "약 190mi / 300km",
+   "park": "도착 후 캠프 주차",
+   "meal": "중간 점심",
+   "book": "Housekeeping Camp 확정",
+   "planb": "늦으면 저녁 산책 삭제",
+   "memo": "중간 휴식 1회"
+  },
+  {
+   "day": "9/19",
+   "time": "16:30~저녁",
+   "title": "Housekeeping Camp 체크인 / Valley 산책",
+   "move": "도보",
+   "dist": "-",
+   "park": "차량 고정",
+   "meal": "캠프/간단한 저녁",
+   "book": "확정",
+   "planb": "피곤하면 캠프 휴식",
+   "memo": "음식·향 있는 물품 bear-safe 보관"
+  },
+  {
+   "day": "9/20",
+   "time": "06:30~07:00",
+   "title": "Housekeeping Camp 체크아웃 준비 → Tioga Road 출발",
+   "move": "렌터카",
+   "dist": "-",
+   "park": "짐 정리 후 차량 적재",
+   "meal": "간단한 아침",
+   "book": "Tioga Road 당일 개방 확인",
+   "planb": "도로/날씨 문제 시 Valley 일정",
+   "memo": "High Country 데이 · 연료/물/간식 준비"
+  },
+  {
+   "day": "9/20",
+   "time": "07:00~13:30",
+   "title": "Tioga Road → Olmsted Point → Tenaya Lake → Tuolumne Meadows → Tioga Pass → Valley 복귀",
+   "move": "렌터카",
+   "dist": "왕복 약 110~130mi 내외",
+   "park": "각 전망 포인트 주차",
+   "meal": "간식/간단한 점심",
+   "book": "Tioga Road 당일 개방 확인",
+   "planb": "시간 부족 시 Tioga Pass 종점 생략",
+   "memo": "밸리 하이킹 대신 High Sierra 풍경 중심"
+  },
+  {
+   "day": "9/20",
+   "time": "13:30~16:15",
+   "title": "Curry Village 체크인·점심·충분한 휴식",
+   "move": "도보/렌터카",
+   "dist": "수 km",
+   "park": "Curry Village 주차",
+   "meal": "늦은 점심",
+   "book": "Curry Village 숙박 확정",
+   "planb": "복귀 지연 시 휴식시간 축소",
+   "memo": "저녁 Glacier Point 위해 체력 비축"
+  },
+  {
+   "day": "9/20",
+   "time": "16:30~20:30",
+   "title": "Glacier Point 일몰 · Half Dome / Yosemite Valley 전망",
+   "move": "렌터카",
+   "dist": "Valley↔Glacier Point 왕복 약 60mi 내외",
+   "park": "Glacier Point 주차 / 야간 복귀",
+   "meal": "출발 전 간식·물, 복귀 후 간단한 저녁",
+   "book": "Glacier Point Road·일몰시각 당일 확인",
+   "planb": "피로/도로 문제 시 Valley 일몰",
+   "memo": "일몰 60~90분 전 도착 목표"
+  },
+  {
+   "day": "9/21",
+   "time": "07:00~10:45",
+   "title": "기상·아침·체크아웃 준비 → 08:00 Yosemite Valley 부자 라이딩 → 반납·출발",
+   "move": "자전거/렌터카",
+   "dist": "라이딩 약 10~15km",
+   "park": "짐은 차량 트렁크 / Curry Village 차량 고정",
+   "meal": "간단한 아침·간식",
+   "book": "자전거 선착순 · 08:00 오픈 기준",
+   "planb": "대여 불가 시 짧은 Valley 산책 후 조기 출발",
+   "memo": "귀중품 휴대 · 퍼포먼스보다 풍경·사진"
+  },
+  {
+   "day": "9/21",
+   "time": "10:45~14:00",
+   "title": "Yosemite → Livermore",
+   "move": "렌터카",
+   "dist": "약 150mi / 240km",
+   "park": "-",
+   "meal": "중간 간식",
+   "book": "불필요",
+   "planb": "교통에 따라 ±30분",
+   "memo": "휴식 1회"
+  },
+  {
+   "day": "9/21",
+   "time": "14:00~19:15",
+   "title": "San Francisco Premium Outlets 4시간 → Sunnyvale 이동·체크인",
+   "move": "렌터카/도보",
+   "dist": "Livermore→Sunnyvale 약 45mi / 70km",
+   "park": "아울렛·호텔 주차",
+   "meal": "늦은 점심/간식 + In-N-Out #1 또는 호텔 주변 저녁",
+   "book": "Best Western 확정",
+   "planb": "쇼핑 3시간으로 축소 가능",
+   "memo": "Monterey 제외 · 저녁 추가 관광 없음"
+  },
+  {
+   "day": "9/22",
+   "time": "07:30~11:00",
+   "title": "호텔 조식 → Intel/Santa Clara",
+   "move": "렌터카",
+   "dist": "약 10mi",
+   "park": "현장 주차",
+   "meal": "조식 포함",
+   "book": "방문 운영 확인",
+   "planb": "외부 위주",
+   "memo": "가볍게 시작"
+  },
+  {
+   "day": "9/22",
+   "time": "11:30~14:00",
+   "title": "점심 → Googleplex 주변",
+   "move": "렌터카",
+   "dist": "약 10~15mi",
+   "park": "방문 가능 구역",
+   "meal": "점심",
+   "book": "불필요",
+   "planb": "외관만 보고 이동",
+   "memo": "기업 인증샷 투어로 만들지 않기"
+  },
+  {
+   "day": "9/22",
+   "time": "14:30~17:20",
+   "title": "PGA TOUR Superstore → Apple Park Visitor Center",
+   "move": "렌터카",
+   "dist": "약 15~20mi",
+   "park": "각 시설 주차",
+   "meal": "간식",
+   "book": "불필요",
+   "planb": "순서 교환 가능",
+   "memo": "17:30 이후 호텔 휴식"
+  },
+  {
+   "day": "9/23",
+   "time": "07:30~09:00",
+   "title": "조식·Best Western 체크아웃 → Stanford",
+   "move": "렌터카",
+   "dist": "약 10mi",
+   "park": "Stanford Visitor Parking",
+   "meal": "조식 포함",
+   "book": "주차 결제 필요",
+   "planb": "도보 캠퍼스",
+   "memo": "짐은 트렁크, 귀중품 휴대"
+  },
+  {
+   "day": "9/23",
+   "time": "09:00~12:00",
+   "title": "Stanford Campus Ride + 캠퍼스",
+   "move": "자전거/도보",
+   "dist": "라이딩 8~12km",
+   "park": "차량 그대로",
+   "meal": "-",
+   "book": "자전거 대여 사전확인 권장",
+   "planb": "자전거 없으면 도보",
+   "memo": "Campus Bike Shop"
+  },
+  {
+   "day": "9/23",
+   "time": "12:00~13:00",
+   "title": "Stanford 캠퍼스 점심",
+   "move": "도보",
+   "dist": "-",
+   "park": "-",
+   "meal": "점심",
+   "book": "불필요",
+   "planb": "근처 식당",
+   "memo": "학생 분위기 경험"
+  },
+  {
+   "day": "9/23",
+   "time": "13:30~16:00",
+   "title": "Computer History Museum",
+   "move": "렌터카 + 도보",
+   "dist": "약 10mi",
+   "park": "현장 주차",
+   "meal": "-",
+   "book": "입장권 권장",
+   "planb": "관람 2시간으로 축소",
+   "memo": "핵심 전시 위주"
+  },
+  {
+   "day": "9/23",
+   "time": "16:00~18:30",
+   "title": "여유시간 + 이른 저녁",
+   "move": "렌터카",
+   "dist": "가변",
+   "park": "식당 주차",
+   "meal": "저녁",
+   "book": "불필요",
+   "planb": "바로 SFO 이동",
+   "memo": "Apple은 전날 완료"
+  },
+  {
+   "day": "9/23",
+   "time": "18:45~20:30",
+   "title": "SFO 이동 → 주유 → 렌터카 반납",
+   "move": "렌터카",
+   "dist": "약 25~30mi",
+   "park": "Rental Car Center 반납",
+   "meal": "-",
+   "book": "21:00 반납 확정",
+   "planb": "교통 심하면 여유시간 삭제",
+   "memo": "연료 영수증 보관"
+  },
+  {
+   "day": "9/23",
+   "time": "20:30~",
+   "title": "Holiday Inn Express SFO South 체크인",
+   "move": "셔틀/Uber",
+   "dist": "-",
+   "park": "-",
+   "meal": "-",
+   "book": "확정",
+   "planb": "Uber",
+   "memo": "퀸베드 2개"
+  },
+  {
+   "day": "9/24",
+   "time": "07:30~09:30",
+   "title": "호텔 조식·체크아웃 → Fisherman's Wharf",
+   "move": "Uber/Lyft",
+   "dist": "-",
+   "park": "없음",
+   "meal": "조식 포함",
+   "book": "숙소 확정",
+   "planb": "출발 30분 지연 가능",
+   "memo": "Marriott 먼저 가지 않음"
+  },
+  {
+   "day": "9/24",
+   "time": "09:30~10:00",
+   "title": "Wharf 인근 짐보관 → 자전거 수령",
+   "move": "도보",
+   "dist": "-",
+   "park": "짐보관소 이용",
+   "meal": "-",
+   "book": "짐보관·자전거 예약 추천",
+   "planb": "다른 보관소/대여점",
+   "memo": "영업시간 긴 보관소 우선"
+  },
+  {
+   "day": "9/24",
+   "time": "10:00~13:00",
+   "title": "Fisherman's Wharf → Golden Gate Bridge → Sausalito",
+   "move": "자전거",
+   "dist": "라이딩 약 13~16km",
+   "park": "-",
+   "meal": "간식",
+   "book": "-",
+   "planb": "강풍 시 천천히 진행",
+   "memo": "일반 하이브리드 추천"
+  },
+  {
+   "day": "9/24",
+   "time": "13:00~15:00",
+   "title": "Sausalito 점심·산책",
+   "move": "도보",
+   "dist": "-",
+   "park": "-",
+   "meal": "점심",
+   "book": "불필요",
+   "planb": "산책 줄이고 페리 대기",
+   "memo": "15시 전후 터미널 이동"
+  },
+  {
+   "day": "9/24",
+   "time": "오후",
+   "title": "Sausalito → San Francisco Ferry",
+   "move": "페리 + 자전거",
+   "dist": "-",
+   "park": "-",
+   "meal": "-",
+   "book": "페리 시간/티켓 확인 필수",
+   "planb": "다음 페리",
+   "memo": "자전거 탑승은 여유 있게"
+  },
+  {
+   "day": "9/24",
+   "time": "16:30~17:30",
+   "title": "자전거 반납 → 짐 찾기 → Marriott Marquis",
+   "move": "도보 + Uber/Lyft",
+   "dist": "-",
+   "park": "짐 회수",
+   "meal": "-",
+   "book": "Marriott 확정",
+   "planb": "페리 지연 시 체크인 늦춤",
+   "memo": "체크인 16:00 이후"
+  },
+  {
+   "day": "9/24",
+   "time": "저녁",
+   "title": "Marriott 체크인·샤워·느긋한 저녁",
+   "move": "도보",
+   "dist": "-",
+   "park": "-",
+   "meal": "저녁",
+   "book": "불필요",
+   "planb": "호텔 휴식",
+   "memo": "Academy of Sciences는 과감히 생략 가능"
+  },
+  {
+   "day": "9/25",
+   "time": "09:00~13:30",
+   "title": "느긋한 SF 오전 / Wharf 또는 North Beach 중 하나",
+   "move": "도보/대중교통",
+   "dist": "-",
+   "park": "없음",
+   "meal": "아침·점심",
+   "book": "불필요",
+   "planb": "아예 호텔 주변",
+   "memo": "과밀 일정 금지"
+  },
+  {
+   "day": "9/25",
+   "time": "14:00~16:30",
+   "title": "Marriott 휴식",
+   "move": "-",
+   "dist": "-",
+   "park": "-",
+   "meal": "-",
+   "book": "-",
+   "planb": "-",
+   "memo": "야구 전 체력 보존"
+  },
+  {
+   "day": "9/25",
+   "time": "17:15~18:00",
+   "title": "Marriott → Oracle Park",
+   "move": "도보",
+   "dist": "-",
+   "park": "없음",
+   "meal": "-",
+   "book": "경기 티켓 필요",
+   "planb": "Muni/Uber",
+   "memo": "구장 일찍 도착"
+  },
+  {
+   "day": "9/25",
+   "time": "19:15~",
+   "title": "Giants vs Dodgers",
+   "move": "도보",
+   "dist": "-",
+   "park": "-",
+   "meal": "구장 음식",
+   "book": "경기 확정",
+   "planb": "-",
+   "memo": "오늘의 핵심"
+  },
+  {
+   "day": "9/26",
+   "time": "08:30~11:00",
+   "title": "아침·Union Square 가벼운 쇼핑 → 체크아웃",
+   "move": "도보",
+   "dist": "-",
+   "park": "짐 호텔",
+   "meal": "브런치",
+   "book": "Marriott 체크아웃 11:00",
+   "planb": "쇼핑 생략",
+   "memo": "짐은 체크아웃 후 보관"
+  },
+  {
+   "day": "9/26",
+   "time": "11:00~13:00",
+   "title": "마지막 산책·점심·짐 회수",
+   "move": "도보",
+   "dist": "-",
+   "park": "호텔 짐보관",
+   "meal": "점심",
+   "book": "불필요",
+   "planb": "호텔 로비 휴식",
+   "memo": "쇼핑은 Livermore에서 대부분 완료"
+  },
+  {
+   "day": "9/26",
+   "time": "13:00~14:00",
+   "title": "Marriott → SFO",
+   "move": "Uber/Lyft",
+   "dist": "-",
+   "park": "-",
+   "meal": "-",
+   "book": "항공 확정",
+   "planb": "BART",
+   "memo": "공항 여유 확보"
+  },
+  {
+   "day": "9/26",
+   "time": "이후",
+   "title": "SFO → ICN",
+   "move": "항공",
+   "dist": "-",
+   "park": "-",
+   "meal": "기내식",
+   "book": "확정",
+   "planb": "-",
+   "memo": "9/27 한국 도착"
+  }
+ ],
+ "days": [
+  {
+   "day": "9/18",
+   "wd": "금",
+   "keys": "① SFO 입국 ② Westin 이동 ③ 일찍 취침",
+   "stay": "The Westin SFO Airport",
+   "move": "SFO → Millbrae",
+   "eat": "가벼운 저녁",
+   "book": "Westin 현장 추가금 확인",
+   "planb": "입국 지연 시 바로 호텔",
+   "line": "첫날은 회복이 일정"
+  },
+  {
+   "day": "9/19",
+   "wd": "토",
+   "keys": "① 09:00 렌터카 ② Yosemite 이동 ③ Valley 첫인상",
+   "stay": "Housekeeping Camp",
+   "move": "SFO → Yosemite",
+   "eat": "Curry Village 피자",
+   "book": "렌터카·캠프 체크인",
+   "planb": "도착 늦으면 산책 삭제",
+   "line": "관광보다 안전한 장거리 운전"
+  },
+  {
+   "day": "9/20",
+   "wd": "일",
+   "keys": "① Tioga Road/Pass ② 오후 충분한 휴식 ③ Glacier Point 일몰",
+   "stay": "Curry Village",
+   "move": "Valley → Tioga High Country 왕복 → Glacier Point",
+   "eat": "간단한 High Country 간식/점심 + 저녁 간단히",
+   "book": "Tioga Road·Glacier Point Road·일몰시각",
+   "planb": "도로/날씨 문제 시 Valley 중심",
+   "line": "아침엔 High Sierra, 저녁엔 Half Dome 일몰"
+  },
+  {
+   "day": "9/21",
+   "wd": "월",
+   "keys": "① 08:00 Valley 부자 라이딩 ② Livermore 쇼핑 ③ Sunnyvale",
+   "stay": "Best Western Silicon Valley Inn",
+   "move": "Yosemite → Livermore → Sunnyvale",
+   "eat": "In-N-Out #1",
+   "book": "Curry Village 자전거 선착순·아울렛 영업",
+   "planb": "대여 불가 시 조기 출발 / 쇼핑 3시간",
+   "line": "Yosemite 마지막 아침을 자전거로 마무리"
+  },
+  {
+   "day": "9/22",
+   "wd": "화",
+   "keys": "① Silicon Valley ② PGA 쇼핑 ③ Apple Park",
+   "stay": "Best Western Silicon Valley Inn",
+   "move": "Santa Clara/Cupertino 일대",
+   "eat": "Habit 또는 Shake Shack",
+   "book": "각 스팟 운영시간",
+   "planb": "Google/Intel 먼저 삭제 가능",
+   "line": "기업보다 분위기 경험"
+  },
+  {
+   "day": "9/23",
+   "wd": "수",
+   "keys": "① Stanford 라이딩 ② CHM ③ 렌터카 21시 반납",
+   "stay": "Holiday Inn Express SFO South",
+   "move": "Sunnyvale → Stanford → Mountain View → SFO",
+   "eat": "Stanford 캠퍼스 점심",
+   "book": "Bike/CHM/렌터카",
+   "planb": "CHM 축소 후 SFO 직행",
+   "line": "차 안 짐 보안 최우선"
+  },
+  {
+   "day": "9/24",
+   "wd": "목",
+   "keys": "① Wharf 짐보관 ② Golden Gate 라이딩 ③ Sausalito Ferry",
+   "stay": "San Francisco Marriott Marquis",
+   "move": "Burlingame → Wharf → Sausalito → SF",
+   "eat": "Sausalito 해산물 + Super Duper #2",
+   "book": "짐보관/자전거/페리",
+   "planb": "페리 다음 편, Academy 삭제",
+   "line": "짐→자전거→페리→짐→호텔"
+  },
+  {
+   "day": "9/25",
+   "wd": "금",
+   "keys": "① 느긋한 오전 ② 14~16:30 휴식 ③ Giants-Dodgers 19:15",
+   "stay": "San Francisco Marriott Marquis",
+   "move": "도보 중심",
+   "eat": "Oracle Park Garlic Fries/Crab Sandwich",
+   "book": "MLB 티켓",
+   "planb": "오전 관광 전부 삭제 가능",
+   "line": "오늘은 그냥 야구팬"
+  },
+  {
+   "day": "9/26",
+   "wd": "토",
+   "keys": "① 마지막 쇼핑 ② 체크아웃 ③ 13시 SFO 출발",
+   "stay": "기내",
+   "move": "Union Square → SFO",
+   "eat": "브런치/버거 #3 선택",
+   "book": "항공편/공항 이동",
+   "planb": "쇼핑 생략하고 공항",
+   "line": "여행 최종 Burger Champion 선정"
+  }
+ ],
+ "bookings": [
+  {
+   "kind": "호텔",
+   "date": "9/18~9/19",
+   "name": "The Westin San Francisco Airport",
+   "loc": "1 Old Bayshore Hwy, Millbrae",
+   "inn": "9/18 15:00 이후",
+   "outt": "9/19 12:00 이전",
+   "pay": "결제 완료 + 현장 $34.65 / 조식 불포함",
+   "memo": "첫날 잠만 자고 다음날 SFO 렌터카"
+  },
+  {
+   "kind": "렌터카",
+   "date": "9/19~9/23",
+   "name": "Jeep Compass 또는 동급 CFAR / Europcar·FOX",
+   "loc": "SFO / FOX 서비스",
+   "inn": "9/19 09:00",
+   "outt": "9/23 21:00",
+   "pay": "결제 완료 / 현장 US$0 / 보증금 Hold (금액은 바우처 확인)",
+   "memo": "무제한 마일리지·Full-to-Full / CDW·대인대물·도난 자기부담금 0 / Liability 보상한도 확인 / 영문면허증 인정"
+  },
+  {
+   "kind": "호텔",
+   "date": "9/19",
+   "name": "Housekeeping Camp",
+   "loc": "Yosemite Valley",
+   "inn": "9/19",
+   "outt": "9/20",
+   "pay": "확정",
+   "memo": "첫 Yosemite 밤"
+  },
+  {
+   "kind": "호텔",
+   "date": "9/20",
+   "name": "Curry Village",
+   "loc": "Yosemite Valley",
+   "inn": "9/20",
+   "outt": "9/21",
+   "pay": "확정",
+   "memo": "아침 일찍 주차 후 라이딩"
+  },
+  {
+   "kind": "호텔",
+   "date": "9/21~9/23",
+   "name": "Best Western Silicon Valley Inn",
+   "loc": "600 N Mathilda Ave, Sunnyvale",
+   "inn": "9/21 15:00 이후",
+   "outt": "9/23 11:00 이전",
+   "pay": "결제 완료 / 9/22·23 조식 2인",
+   "memo": "King 1개"
+  },
+  {
+   "kind": "호텔",
+   "date": "9/23~9/24",
+   "name": "Holiday Inn Express SFO South",
+   "loc": "1250 Old Bayshore Hwy, Burlingame",
+   "inn": "9/23 15:00~24:00",
+   "outt": "9/24 12:00 이전",
+   "pay": "결제 완료 / 9/24 조식 2인",
+   "memo": "렌터카 반납 후 1박"
+  },
+  {
+   "kind": "호텔",
+   "date": "9/24~9/26",
+   "name": "San Francisco Marriott Marquis",
+   "loc": "780 Mission St, San Francisco",
+   "inn": "9/24 16:00",
+   "outt": "9/26 11:00",
+   "pay": "예약 확정 / Double 2",
+   "memo": "9/24 짐은 Wharf 인근 보관 후 저녁 체크인"
+  },
+  {
+   "kind": "야구",
+   "date": "9/25",
+   "name": "San Francisco Giants vs LA Dodgers",
+   "loc": "Oracle Park",
+   "inn": "19:15",
+   "outt": "-",
+   "pay": "티켓 필요/확인",
+   "memo": "17:45~18:00 구장 도착 목표"
+  }
+ ],
+ "bookingTodo": [
+  {
+   "item": "Yosemite 자전거 대여 확인",
+   "when": "출발 전",
+   "status": "확인 필요",
+   "memo": "9/20 오전",
+   "url": ""
+  },
+  {
+   "item": "Stanford Campus Bike Shop 대여",
+   "when": "출발 전",
+   "status": "확인 필요",
+   "memo": "9/23 09:00 시작 목표",
+   "url": ""
+  },
+  {
+   "item": "Computer History Museum 입장",
+   "when": "출발 전",
+   "status": "확인 권장",
+   "memo": "9/23 13:30~16:00",
+   "url": ""
+  },
+  {
+   "item": "Wharf 인근 짐보관소",
+   "when": "출발 전",
+   "status": "예약 추천",
+   "memo": "추천: Bounce - Near Fisherman's Wharf (495 Jefferson St)",
+   "url": "https://bounce.com/stores/san-francisco/3lYPuy"
+  },
+  {
+   "item": "SF 자전거 대여",
+   "when": "출발 전",
+   "status": "예약 추천",
+   "memo": "추천: Blazing Saddles - Hyde Street (2715 Hyde St)",
+   "url": "https://www.blazingsaddles.com/"
+  },
+  {
+   "item": "Sausalito → SF Ferry",
+   "when": "출발 직전 재확인",
+   "status": "확인 필요",
+   "memo": "자전거 탑승 정책·시간 확인",
+   "url": ""
+  },
+  {
+   "item": "Giants vs Dodgers 티켓",
+   "when": "가능한 빨리",
+   "status": "필수",
+   "memo": "9/25 19:15",
+   "url": ""
+  }
+ ],
+ "spots": [
+  {
+   "name": "Yosemite Valley",
+   "must": "9/21 아침 부자 라이딩 + Half Dome 풍경",
+   "timing": "08:00 자전거 확보 후 2시간 안팎",
+   "care": "짐은 차량 트렁크·귀중품 휴대, 음식 bear-safe",
+   "withSon": "자전거 세워 부자 사진",
+   "planb": "대여 불가 시 짧은 Valley 산책"
+  },
+  {
+   "name": "Housekeeping Camp",
+   "must": "캠핑 분위기 즐기기",
+   "timing": "해 지기 전 정리",
+   "care": "밤 기온 대비 플리스/얇은 패딩",
+   "withSon": "캠프에서 하루 최고의 장면 이야기",
+   "planb": "늦은 도착이면 바로 식사·취침"
+  },
+  {
+   "name": "Curry Village",
+   "must": "자전거 대여·식사 베이스",
+   "timing": "자전거는 아침 일찍",
+   "care": "주차 후 셔틀/도보 활용",
+   "withSon": "피자 한 판 나눠먹기",
+   "planb": "대여 불가 시 도보 코스"
+  },
+  {
+   "name": "Livermore Outlet",
+   "must": "꼭 살 브랜드 우선",
+   "timing": "A필수/B여유 매장으로 구분",
+   "care": "4시간 이상 늘리지 않기",
+   "withSon": "각자 사고 싶은 것 하나 고르기",
+   "planb": "시간 부족 시 B매장 삭제"
+  },
+  {
+   "name": "Silicon Valley",
+   "must": "Google/Apple/Intel 분위기",
+   "timing": "각 45~60분 내외",
+   "care": "인증샷 순례로 만들지 않기",
+   "withSon": "세상을 바꿀 물건 하나 상상하기",
+   "planb": "Google/Intel 생략"
+  },
+  {
+   "name": "Stanford",
+   "must": "캠퍼스 라이딩+학생 공간",
+   "timing": "오전 추천",
+   "care": "평일 방문자 주차 규정 확인",
+   "withSon": "학생처럼 캠퍼스에서 점심",
+   "planb": "자전거 불가 시 도보"
+  },
+  {
+   "name": "Computer History Museum",
+   "must": "PC→인터넷→AI 흐름",
+   "timing": "2~2.5시간이면 충분",
+   "care": "모든 설명 읽지 않기",
+   "withSon": "가장 신기한 기술 하나 고르기",
+   "planb": "90분 핵심 관람"
+  },
+  {
+   "name": "Golden Gate Ride",
+   "must": "Crissy Field→Bridge→Sausalito",
+   "timing": "바람 고려해 여유 있게",
+   "care": "다리 위 과속 금지, 현장 자전거 동선 준수",
+   "withSon": "다리 전/후 부자+자전거 사진",
+   "planb": "강풍 시 구간 단축"
+  },
+  {
+   "name": "Sausalito",
+   "must": "점심+페리",
+   "timing": "식당 전 페리 시간 확인",
+   "care": "페리 30분 전 도착 권장",
+   "withSon": "라이딩 점수 매기기",
+   "planb": "다음 페리"
+  },
+  {
+   "name": "Oracle Park",
+   "must": "경기 90분 전 입장",
+   "timing": "17:45~18:00 목표",
+   "care": "짐 규정/티켓 미리 확인",
+   "withSon": "모자+야구장 음식+응원",
+   "planb": "오전 일정 삭제하고 체력 확보"
+  },
+  {
+   "name": "Glacier Point",
+   "must": "Half Dome·Yosemite Valley 일몰 전망",
+   "timing": "9/20 오후 휴식 후 출발, 일몰 60~90분 전 도착 목표",
+   "care": "일몰 후 산길 운전·기온 저하 대비, 당일 도로상황 확인",
+   "withSon": "하루 달린 Valley를 위에서 함께 내려다보기",
+   "planb": "피로/도로 이슈 시 Valley 일몰로 대체"
+  },
+  {
+   "name": "Tioga Road / Tioga Pass",
+   "must": "Olmsted Point·Tenaya Lake·Tuolumne Meadows·High Sierra",
+   "timing": "9/20 아침 일찍 출발, 오후 초 Valley 복귀 목표",
+   "care": "당일 도로·날씨 확인, 연료·물·간식 준비",
+   "withSon": "Valley와 전혀 다른 Yosemite 풍경 비교하기",
+   "planb": "시간 부족 시 Tioga Pass 종점 생략"
+  }
+ ],
+ "food": [
+  {
+   "when": "9/19 Yosemite",
+   "dish": "미국식 피자",
+   "place": "Curry Village Pizza Deck",
+   "order": "피자 + 음료",
+   "prio": "높음",
+   "stamp": "",
+   "memo": "첫날 캠핑 분위기"
+  },
+  {
+   "when": "9/20 Yosemite",
+   "dish": "타코/부리토",
+   "place": "Curry Village",
+   "order": "가볍게 점심",
+   "prio": "보통",
+   "stamp": "",
+   "memo": "라이딩 후 과식 금지"
+  },
+  {
+   "when": "9/21 Sunnyvale",
+   "dish": "캘리포니아 버거",
+   "place": "In-N-Out",
+   "order": "Double-Double / Animal Style 비교",
+   "prio": "최우선",
+   "stamp": "#1",
+   "memo": "사진 한 장"
+  },
+  {
+   "when": "9/22 Silicon Valley",
+   "dish": "Charburger 또는 ShackBurger",
+   "place": "Habit / Shake Shack",
+   "order": "둘 중 하나만",
+   "prio": "선택",
+   "stamp": "#2 후보",
+   "memo": "버거 연속이면 다른 음식으로 변경"
+  },
+  {
+   "when": "9/23 Stanford",
+   "dish": "캠퍼스 런치",
+   "place": "Stanford campus",
+   "order": "버거/샌드위치 등",
+   "prio": "높음",
+   "stamp": "",
+   "memo": "학생처럼 먹는 경험"
+  },
+  {
+   "when": "9/24 Sausalito",
+   "dish": "해산물/클램차우더",
+   "place": "Sausalito waterfront",
+   "order": "해산물 + 샌드위치 나눔",
+   "prio": "최우선",
+   "stamp": "",
+   "memo": "페리 시간 먼저 확인"
+  },
+  {
+   "when": "9/24 SF 저녁",
+   "dish": "SF 로컬 버거",
+   "place": "Super Duper",
+   "order": "Super Burger + fries/shake",
+   "prio": "최우선",
+   "stamp": "#2~3",
+   "memo": "Marriott 바로 인근 후보"
+  },
+  {
+   "when": "9/25 Oracle Park",
+   "dish": "야구장 음식",
+   "place": "Oracle Park",
+   "order": "Garlic Fries + Crab Sandwich + Hot Dog",
+   "prio": "최우선",
+   "stamp": "",
+   "memo": "저녁 먹고 입장하지 않기"
+  },
+  {
+   "when": "9/26 Union Square",
+   "dish": "브런치/마지막 버거",
+   "place": "Union Square",
+   "order": "컨디션 따라 선택",
+   "prio": "선택",
+   "stamp": "#3~4",
+   "memo": "억지로 도장 채우지 않기"
+  }
+ ],
+ "burger": [
+  {
+   "brand": "In-N-Out",
+   "when": "9/21",
+   "menu": "Double-Double / Animal Style"
+  },
+  {
+   "brand": "The Habit",
+   "when": "9/22 후보",
+   "menu": "Charburger"
+  },
+  {
+   "brand": "Shake Shack",
+   "when": "9/22 후보",
+   "menu": "ShackBurger"
+  },
+  {
+   "brand": "Super Duper",
+   "when": "9/24",
+   "menu": "Super Burger"
+  },
+  {
+   "brand": "Five Guys",
+   "when": "여유 시",
+   "menu": "Cheeseburger + Cajun Fries"
+  }
+ ],
+ "shopping": [
+  {
+   "area": "Livermore Outlet",
+   "store": "필수 브랜드 A",
+   "why": "꼭 필요한 물건",
+   "prio": "A",
+   "memo": "출국 전 브랜드/사이즈 작성"
+  },
+  {
+   "area": "Livermore Outlet",
+   "store": "여유 브랜드 B",
+   "why": "시간 남으면",
+   "prio": "B",
+   "memo": "A 끝난 뒤"
+  },
+  {
+   "area": "Union Square",
+   "store": "Nintendo SAN FRANCISCO",
+   "why": "아들 기념품/구경",
+   "prio": "A",
+   "memo": "마지막 날 재미 요소"
+  },
+  {
+   "area": "Union Square",
+   "store": "Nike San Francisco",
+   "why": "스포츠웨어/신발",
+   "prio": "B",
+   "memo": "Livermore에서 샀으면 생략"
+  },
+  {
+   "area": "Union Square",
+   "store": "Macy's",
+   "why": "미국 백화점 경험/선물",
+   "prio": "B",
+   "memo": "한 번에 둘러보기"
+  },
+  {
+   "area": "Union Square",
+   "store": "Ross Dress for Less",
+   "why": "득템 놀이",
+   "prio": "C",
+   "memo": "시간 남을 때만"
+  }
+ ],
+ "departCheck": [
+  {
+   "cat": "예약",
+   "item": "Giants vs Dodgers 티켓 확인",
+   "due": "출발 전",
+   "memo": "9/25 19:15"
+  },
+  {
+   "cat": "예약",
+   "item": "9/24 SF 자전거 대여",
+   "due": "출발 전",
+   "memo": "Wharf/Hyde 동선"
+  },
+  {
+   "cat": "예약",
+   "item": "9/24 짐보관",
+   "due": "출발 전",
+   "memo": "영업시간 긴 곳"
+  },
+  {
+   "cat": "예약",
+   "item": "Sausalito→SF 페리 시간/자전거 정책 재확인",
+   "due": "9/23",
+   "memo": "시간은 최신 스케줄 확인"
+  },
+  {
+   "cat": "확인",
+   "item": "Stanford 자전거 대여 가능 여부",
+   "due": "출발 전",
+   "memo": "불가 시 도보 Plan B"
+  },
+  {
+   "cat": "확인",
+   "item": "CHM 운영/티켓",
+   "due": "출발 전",
+   "memo": "9/23"
+  },
+  {
+   "cat": "차량",
+   "item": "QEEQ/FOX 바우처·영문면허·실물 신용카드·귀국 e-ticket",
+   "due": "출국 전",
+   "memo": "보증금 약 금액 비공개 한도 확보 / IDP 불필요(이번 계약 조건)"
+  },
+  {
+   "cat": "Yosemite",
+   "item": "날씨·도로·화재/캠프 규정",
+   "due": "9/18",
+   "memo": "NPS 최신 확인"
+  },
+  {
+   "cat": "짐",
+   "item": "플리스/얇은 패딩",
+   "due": "출국 전",
+   "memo": "Yosemite 밤"
+  },
+  {
+   "cat": "디지털",
+   "item": "eSIM/충전기/보조배터리/오프라인 지도",
+   "due": "출국 전",
+   "memo": ""
+  },
+  {
+   "cat": "문서",
+   "item": "여권/항공/호텔 바우처 오프라인 저장",
+   "due": "출국 전",
+   "memo": ""
+  },
+  {
+   "cat": "차량",
+   "item": "Liability 실제 보상한도 확인",
+   "due": "출국 전",
+   "memo": "대인대물 포함·자기부담금 0, 보상한도만 확인"
+  },
+  {
+   "cat": "차량",
+   "item": "FOX toll 처리방식/수수료 확인",
+   "due": "9/19 픽업",
+   "memo": "불필요한 Express Lane 회피"
+  },
+  {
+   "cat": "차량",
+   "item": "연료 종류 확인 / Full-to-Full",
+   "due": "9/19 픽업",
+   "memo": "9/23 반납 전 가득 주유·영수증 보관"
+  },
+  {
+   "cat": "안전",
+   "item": "렌터카 출차/반납 사진·영상",
+   "due": "9/19·9/23",
+   "memo": "휠·유리·외관·연료계 포함"
+  }
+ ],
+ "prep": [
+  {
+   "cat": "입국",
+   "item": "여권 유효기간·ESTA 확인",
+   "dad": "●",
+   "son": "●",
+   "when": "지금",
+   "memo": ""
+  },
+  {
+   "cat": "입국",
+   "item": "항공 e-ticket/귀국편 오프라인 저장",
+   "dad": "●",
+   "son": "●",
+   "when": "1주 전",
+   "memo": "FOX 픽업 시 왕복/귀국 항공권 제시 대비"
+  },
+  {
+   "cat": "보험",
+   "item": "여행자보험·증권·긴급연락처",
+   "dad": "●",
+   "son": "●",
+   "when": "1~2주 전",
+   "memo": ""
+  },
+  {
+   "cat": "통신",
+   "item": "eSIM/로밍 결정 및 오프라인 지도 저장",
+   "dad": "●",
+   "son": "●",
+   "when": "1주 전~전날",
+   "memo": "Yosemite 통신 불안 대비"
+  },
+  {
+   "cat": "결제",
+   "item": "해외결제 Visa/Master 2장·한도 확인",
+   "dad": "●",
+   "son": "",
+   "when": "1주 전",
+   "memo": "렌터카 보증금 Hold 고려"
+  },
+  {
+   "cat": "렌터카",
+   "item": "영문운전면허증 원본",
+   "dad": "●",
+   "son": "",
+   "when": "출국 전",
+   "memo": "이번 FOX 조건상 IDP 없이 인정"
+  },
+  {
+   "cat": "렌터카",
+   "item": "QEEQ/FOX 바우처·확인번호 저장 (바우처 참조)",
+   "dad": "●",
+   "son": "",
+   "when": "출국 전",
+   "memo": "예약번호는 바우처 참조"
+  },
+  {
+   "cat": "렌터카",
+   "item": "Liability 실제 보상한도 확인",
+   "dad": "●",
+   "son": "",
+   "when": "출국 전",
+   "memo": "보험 포함/자기부담금 0, 한도만 확인"
+  },
+  {
+   "cat": "Yosemite",
+   "item": "물·간식·바람막이/얇은 패딩·선크림",
+   "dad": "●",
+   "son": "●",
+   "when": "9/19 장보기/출국 전",
+   "memo": ""
+  },
+  {
+   "cat": "Yosemite",
+   "item": "Tioga Road·Glacier Point Road 당일 확인",
+   "dad": "●",
+   "son": "",
+   "when": "9/20 아침",
+   "memo": ""
+  },
+  {
+   "cat": "라이딩",
+   "item": "장갑·선글라스·기능성 의류·바람막이",
+   "dad": "●",
+   "son": "●",
+   "when": "짐싸기",
+   "memo": ""
+  },
+  {
+   "cat": "라이딩",
+   "item": "Blazing Saddles·Bounce·Sausalito Ferry 재확인",
+   "dad": "●",
+   "son": "",
+   "when": "9/23 저녁",
+   "memo": "날씨/바람 보고 결정"
+  },
+  {
+   "cat": "MLB",
+   "item": "Giants vs Dodgers 티켓 확인",
+   "dad": "●",
+   "son": "●",
+   "when": "가능한 빨리",
+   "memo": "9/25 19:15"
+  },
+  {
+   "cat": "전자기기",
+   "item": "휴대폰·충전기·보조배터리·차량 케이블",
+   "dad": "●",
+   "son": "●",
+   "when": "전날",
+   "memo": ""
+  },
+  {
+   "cat": "상비약",
+   "item": "해열진통제·소화제·지사제·밴드·개인약",
+   "dad": "●",
+   "son": "●",
+   "when": "출국 전",
+   "memo": ""
+  },
+  {
+   "cat": "문서백업",
+   "item": "여권·ESTA·호텔·렌터카·보험 PDF/캡처",
+   "dad": "●",
+   "son": "●",
+   "when": "출국 전",
+   "memo": "클라우드+휴대폰"
+  }
+ ],
+ "driveTips": [
+  {
+   "cat": "톨",
+   "point": "현금 톨게이트를 기대하지 말고 FOX toll 처리방식/서비스 수수료 확인",
+   "apply": "유료교량·Express Lane은 필요 없으면 피하기",
+   "check": "How are tolls handled with this rental?",
+   "status": "확인"
+  },
+  {
+   "cat": "주차",
+   "point": "표지판·색상·시간제한 확인 후 결제",
+   "apply": "Stanford Visitor Parking/ParkMobile",
+   "check": "렌터카 번호판 정확히 입력",
+   "status": "확인"
+  },
+  {
+   "cat": "주유",
+   "point": "Full-to-Full",
+   "apply": "9/23 SFO 반납 전 가득 주유",
+   "check": "연료 종류 픽업 때 확인·영수증 보관",
+   "status": "필수"
+  },
+  {
+   "cat": "카드",
+   "point": "주유기 ZIP 오류 시 매장 선결제",
+   "apply": "해외결제 카드 2장 권장",
+   "check": "USD 결제 선택",
+   "status": "권장"
+  },
+  {
+   "cat": "차량보안",
+   "point": "차 안에 가방·쇼핑백·전자기기 노출 금지",
+   "apply": "9/21 Outlet, 9/23 Stanford·CHM 특히 주의",
+   "check": "목적지 도착 후 트렁크 열지 않기",
+   "status": "필수"
+  },
+  {
+   "cat": "픽업점검",
+   "point": "외관·휠·유리·연료·주행거리 영상 촬영",
+   "apply": "9/19 FOX 출차 전",
+   "check": "기존 손상 계약서 반영 확인",
+   "status": "필수"
+  },
+  {
+   "cat": "반납",
+   "point": "주유→영수증→차량 사진/영상→Final receipt",
+   "apply": "9/23 20:00~20:30 목표, 계약 21:00",
+   "check": "개인물품/트렁크 최종 확인",
+   "status": "필수"
+  },
+  {
+   "cat": "보험",
+   "point": "차량손해·대인대물·도난 자기부담금 0 포함",
+   "apply": "일반 추가 CDW 중복가입 주의",
+   "check": "Liability 실제 보상한도 확인",
+   "status": "확인"
+  },
+  {
+   "cat": "긴급출동",
+   "point": "기본 포함 여부 불명확",
+   "apply": "가격/보장범위 보고 선택",
+   "check": "펑크·키분실·견인 범위 확인",
+   "status": "선택"
+  }
+ ],
+ "phrases": [
+  {
+   "cat": "호텔",
+   "en": "Hi, I'd like to check in. The reservation is under Lee.",
+   "ko": "체크인하려고 합니다. Lee 이름으로 예약했습니다.",
+   "tip": "여권·결제카드 준비",
+   "mission": ""
+  },
+  {
+   "cat": "호텔",
+   "en": "Is breakfast included? What time is breakfast?",
+   "ko": "조식이 포함됐나요? 몇 시인가요?",
+   "tip": "",
+   "mission": ""
+  },
+  {
+   "cat": "호텔",
+   "en": "Could you hold our luggage until this afternoon?",
+   "ko": "오후까지 짐을 맡아주실 수 있나요?",
+   "tip": "",
+   "mission": ""
+  },
+  {
+   "cat": "렌터카",
+   "en": "I have a reservation. Here's my confirmation.",
+   "ko": "예약했습니다. 확인서입니다.",
+   "tip": "FOX 카운터 / 귀국 e-ticket 준비",
+   "mission": ""
+  },
+  {
+   "cat": "렌터카",
+   "en": "What type of gas does it take? Do I need to return it with a full tank?",
+   "ko": "연료 종류와 가득 채워 반납하는지 확인",
+   "tip": "계약은 Full-to-Full",
+   "mission": ""
+  },
+  {
+   "cat": "렌터카",
+   "en": "How are tolls handled with this rental?",
+   "ko": "이 렌터카의 톨비는 어떻게 처리되나요?",
+   "tip": "서비스 수수료 포함 여부 확인",
+   "mission": ""
+  },
+  {
+   "cat": "렌터카",
+   "en": "I already have zero-deductible damage waiver, liability insurance and theft protection included.",
+   "ko": "자기부담금 0 차량손해·책임·도난 보험이 이미 포함되어 있습니다.",
+   "tip": "추가보험은 이름·보장한도 확인 후 결정",
+   "mission": ""
+  },
+  {
+   "cat": "주유",
+   "en": "My card isn't working at the pump. Can I prepay forty dollars on pump six?",
+   "ko": "주유기에서 카드가 안 됩니다. 6번에 40달러 선결제할게요.",
+   "tip": "ZIP 오류 시 매장 결제",
+   "mission": ""
+  },
+  {
+   "cat": "자전거",
+   "en": "We'd like to rent two bikes. Can you help us find the right size for my son?",
+   "ko": "자전거 두 대 빌리고 아들 사이즈를 맞춰주세요.",
+   "tip": "헬멧·반납시간 확인",
+   "mission": "Two bikes, please."
+  },
+  {
+   "cat": "자전거",
+   "en": "Can we take the bikes on the ferry from Sausalito?",
+   "ko": "소살리토에서 페리에 자전거를 실을 수 있나요?",
+   "tip": "",
+   "mission": ""
+  },
+  {
+   "cat": "식당",
+   "en": "Two, please. What's your most popular dish?",
+   "ko": "두 명입니다. 가장 인기 있는 메뉴가 뭔가요?",
+   "tip": "테이블 서비스는 gratuity 포함 여부 확인",
+   "mission": ""
+  },
+  {
+   "cat": "식당",
+   "en": "Could we get the check, please?",
+   "ko": "계산서 주세요.",
+   "tip": "",
+   "mission": ""
+  },
+  {
+   "cat": "쇼핑",
+   "en": "Do you have this in my size?",
+   "ko": "제 사이즈가 있나요?",
+   "tip": "",
+   "mission": "Do you have this in my size?"
+  },
+  {
+   "cat": "쇼핑",
+   "en": "Is there an additional discount?",
+   "ko": "추가 할인이 있나요?",
+   "tip": "",
+   "mission": ""
+  },
+  {
+   "cat": "주차",
+   "en": "Where's the visitor parking? Do I need to pay for parking?",
+   "ko": "방문객 주차장은 어디고 결제가 필요한가요?",
+   "tip": "Stanford는 Visitor Parking/ParkMobile 확인",
+   "mission": ""
+  },
+  {
+   "cat": "확인",
+   "en": "Could you say that again a little more slowly, please?",
+   "ko": "조금 천천히 다시 말씀해 주세요.",
+   "tip": "못 알아들으면 바로 사용",
+   "mission": ""
+  },
+  {
+   "cat": "확인",
+   "en": "So, I need to return the car by nine, right?",
+   "ko": "차를 9시까지 반납하면 되는 거죠?",
+   "tip": "시간·장소는 되묻기로 확인",
+   "mission": ""
+  }
+ ]
+};
+
+/* ---------- 아들 미션 (일정 기반) ---------- */
+const MISSIONS = [
+ {id:'m01',day:'pre',text:'여행 회화 탭에서 내 미션 문장 5개를 소리 내서 읽어보기',kind:'영어'},
+ {id:'m02',day:'pre',text:'내 짐 직접 챙기기 — 충전기·보조배터리·물병·바람막이·장갑',kind:'준비'},
+ {id:'m03',day:'pre',text:'요세미티와 골든게이트 사진을 찾아보고 가장 기대되는 곳 한 줄 적기',kind:'기록'},
+ {id:'m04',day:'9/18',text:'입국 심사에서 아빠 옆에서 인사와 방문 목적 말해보기',kind:'영어',say:"Hello. We're here on vacation for nine days."},
+ {id:'m05',day:'9/19',text:'마트에서 오늘 먹을 간식 두 개 직접 고르기',kind:'선택'},
+ {id:'m06',day:'9/19',text:'Curry Village에서 피자 주문 직접 해보기',kind:'영어',say:'Hi, can we get one large pepperoni pizza and two drinks, please?'},
+ {id:'m07',day:'9/19',text:'캠프에서 오늘 최고의 장면 한 줄 남기기 (기록 탭)',kind:'기록'},
+ {id:'m08',day:'9/20',text:'Olmsted Point·Tenaya Lake에서 High Sierra 사진 3장 찍기',kind:'사진'},
+ {id:'m09',day:'9/20',text:'Glacier Point에서 Half Dome 직접 찾아내기',kind:'관찰'},
+ {id:'m10',day:'9/20',text:'밸리와 High Country 중 어디가 더 좋았는지 이유까지 적기',kind:'기록'},
+ {id:'m11',day:'9/21',text:'아침 라이딩 중 자전거 세우고 아빠 사진 한 장 찍기',kind:'사진'},
+ {id:'m12',day:'9/21',text:'In-N-Out에서 주문 직접 해보기',kind:'영어',say:'Two Double-Doubles, one Animal Style, and two fries, please.'},
+ {id:'m13',day:'9/21',text:'In-N-Out 버거 점수 매기기 (버거 탭)',kind:'심사'},
+ {id:'m14',day:'9/21',text:'아울렛에서 내가 사고 싶은 것 하나 정해 아빠에게 이유 설명하기',kind:'선택'},
+ {id:'m15',day:'9/22',text:'Apple Park에서 세상을 바꿀 물건 하나 상상해서 적기',kind:'기록'},
+ {id:'m16',day:'9/22',text:'오늘 먹은 버거(Habit 또는 Shake Shack) 점수 매기기',kind:'심사'},
+ {id:'m17',day:'9/23',text:'Stanford 자전거 대여할 때 내 사이즈 직접 요청하기',kind:'영어',say:'Can you help me find the right size?'},
+ {id:'m18',day:'9/23',text:'Computer History Museum에서 가장 신기한 기술 하나 골라 이유 적기',kind:'기록'},
+ {id:'m19',day:'9/24',text:'자전거 빌리면서 페리 탑승 가능한지 물어보기',kind:'영어',say:'Can we take the bikes on the ferry from Sausalito?'},
+ {id:'m20',day:'9/24',text:'Golden Gate Bridge 위에서 아빠와 자전거 사진 찍기',kind:'사진'},
+ {id:'m21',day:'9/24',text:'오늘 라이딩에 10점 만점으로 점수 주고 이유 적기',kind:'기록'},
+ {id:'m22',day:'9/24',text:'Super Duper 버거 점수 매기기',kind:'심사'},
+ {id:'m23',day:'9/25',text:'Oracle Park에서 Garlic Fries 주문 직접 하기',kind:'영어',say:'Can I get garlic fries and a crab sandwich, please?'},
+ {id:'m24',day:'9/25',text:'경기에서 가장 좋았던 순간 한 줄 남기기',kind:'기록'},
+ {id:'m25',day:'9/26',text:'아빠와 최종 버거 챔피언 정하기',kind:'심사'},
+ {id:'m26',day:'9/26',text:'여행 전체 베스트 3 적기',kind:'기록'}
+];
+
+/* ---------- day meta ---------- */
+const REGION = {
+ '9/18':['도착','var(--soft)'],'9/19':['요세미티','var(--pine)'],'9/20':['요세미티','var(--pine)'],
+ '9/21':['이동·쇼핑','var(--gold)'],'9/22':['실리콘밸리','var(--steel)'],'9/23':['실리콘밸리','var(--steel)'],
+ '9/24':['샌프란시스코','var(--gg)'],'9/25':['샌프란시스코','var(--gg)'],'9/26':['귀국','var(--soft)']};
+const DAYS = DATA.days;
+const dayIndex = d => DAYS.findIndex(x=>x.day===d);
+function dayDate(d){const [m,dd]=d.split('/').map(Number);return new Date(2026,m-1,dd);}
+const now=new Date(), today0=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+const start=dayDate('9/18'), end=dayDate('9/26');
+const dLeft=Math.round((start-today0)/86400000);
+const todayKey=(today0>=start&&today0<=end)?(DAYS.find(x=>dayDate(x.day).getTime()===today0.getTime())||{}).day:null;
+
+/* ---------- storage ---------- */
+/* 이 폰에만 저장합니다. 서버도 인터넷도 쓰지 않습니다.
+   값마다 저장 시각을 남겨두기 때문에, 나중에 두 폰의 기록을 합칠 수 있습니다. */
+const LSKEY='trip2026';
+const LOCAL=(()=>{try{localStorage.setItem('__t','1');localStorage.removeItem('__t');return localStorage;}catch(e){return null;}})();
+const CLAUDE=(typeof window!=='undefined'&&window.storage&&typeof window.storage.get==='function')?window.storage:null;
+const QS=(typeof location!=='undefined')?new URLSearchParams(location.search||''):new URLSearchParams('');
+let KV={}, ME={role:null};
+const canSave=!!(LOCAL||CLAUDE);
+
+function gv(p,d){const e=KV[p];return e?e.v:(d===undefined?false:d);}
+function sv(p,v){KV[p]={v:v,t:Date.now()};saveLocal();}
+function scoreOf(i){const o={};['dad','son'].forEach(w=>['P','F'].forEach(k=>{
+  const e=KV['sc/'+i+'/'+w+k]; if(e&&e.v!=='') o[w+k]=e.v;}));return o;}
+function logOf(day){const o={};['dad','son'].forEach(w=>{const e=KV['log/'+day+'/'+w];if(e)o[w]=e.v;});return o;}
+
+function saveLocalNow(){
+  const blob=JSON.stringify({kv:KV,me:ME});
+  if(LOCAL){try{LOCAL.setItem(LSKEY,blob);}catch(e){}}
+  else if(CLAUDE){try{CLAUDE.set(LSKEY,blob,false);}catch(e){}}
+}
+let slT; function saveLocal(){clearTimeout(slT);slT=setTimeout(saveLocalNow,250);}
+async function loadLocal(){
+  let raw=null;
+  if(LOCAL){try{raw=LOCAL.getItem(LSKEY);}catch(e){}}
+  else if(CLAUDE){try{const r=await CLAUDE.get(LSKEY,false);raw=r&&r.value;}catch(e){}}
+  if(!raw) return;
+  try{const o=JSON.parse(raw);KV=o.kv||{};ME=Object.assign(ME,o.me||{});}catch(e){}
+}
+/* 받은 기록 합치기 — 항목별로 나중에 쓴 값이 남습니다 */
+function mergeKV(other){
+  let n=0;
+  Object.keys(other||{}).forEach(p=>{
+    const r=other[p];
+    if(!r||typeof r.t!=='number') return;
+    const l=KV[p];
+    if(!l||r.t>l.t){KV[p]=r;n++;}
+  });
+  if(n) saveLocalNow();
+  return n;
+}
+function updateStatus(){
+  const el=document.getElementById('sync'); if(!el) return;
+  el.textContent = canSave
+    ? '이 폰에 저장됩니다 · 홈 화면에 추가하면 오프라인에서도 열립니다'
+    : '이 화면에서는 저장되지 않습니다 — 브라우저(Safari·Chrome)로 열어주세요';
+}
+async function writeMe(){saveLocalNow();}
+/* ---------- helpers ---------- */
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clean=s=>(!s||s==='-')?'':s;
+const isDad=()=>ME.role==='dad';
+const meLab=()=>isDad()?'아빠':'아들';
+function dl(pairs){
+  const rows=pairs.filter(p=>clean(p[1])).map(p=>`<dt>${esc(p[0])}</dt><dd${p[2]?' class="b"':''}>${esc(p[1])}</dd>`).join('');
+  return rows?`<dl class="dl">${rows}</dl>`:'';
+}
+function bar(done,total){
+  const pct=total?Math.round(done/total*100):0;
+  return `<div class="bar"><i style="width:${pct}%"></i></div><p class="barlab">${done} / ${total} 완료</p>`;
+}
+function checklist(items){
+  return `<div class="chk">${items.map(it=>`
+    <label><input type="checkbox" data-chk="${esc(it.id)}"${gv('chk/'+it.id)?' checked':''}>
+    <span class="tx"><span class="it">${esc(it.text)}</span>
+    ${it.due?`<span class="mt"><span class="due">${esc(it.due)}</span>${it.memo?' · '+esc(it.memo):''}</span>`:(it.memo?`<span class="mt">${esc(it.memo)}</span>`:'')}
+    ${it.url?`<a class="lnk" href="${esc(it.url)}" target="_blank" rel="noopener">예약 페이지 열기</a>`:''}
+    </span></label>`).join('')}</div>`;
+}
+function spine(active){
+  return `<div class="spine">${DAYS.map(d=>{
+    const rc=(REGION[d.day]||['',''])[1], rg=(REGION[d.day]||[''])[0];
+    return `<button data-goday="${d.day}" style="--rc:${rc}" ${active===d.day?'aria-current="true"':''} class="${todayKey===d.day?'today':''}">
+      <span class="wd">${esc(d.wd)}</span><span class="dd">${esc(d.day)}</span><span class="rg">${esc(rg)}</span></button>`;
+  }).join('')}</div>`;
+}
+function schedRows(day,simple){
+  const rows=DATA.schedule.filter(s=>s.day===day);
+  return `<ul class="tl">${rows.map(s=>`<li><span class="t">${esc(s.time)}</span>
+    <div class="card"><h3>${esc(s.title)}</h3>
+    ${simple?dl([['이동',s.move],['거리',s.dist],['식사',s.meal],['메모',s.memo]])
+            :dl([['이동',s.move],['운전거리',s.dist],['주차·짐',s.park],['식사',s.meal],['예약',s.book],['Plan B',s.planb,1],['메모',s.memo]])}
+    </div></li>`).join('')}</ul>`;
+}
+function dayCard(d,label,simple){
+  const keys=(d.keys||'').split(/(?=[①②③])/).map(s=>s.trim()).filter(Boolean);
+  const rg=(REGION[d.day]||[''])[0];
+  return `<div class="hero"><p class="head">${esc(label)} · ${esc(rg)}</p>
+    <p class="date">${esc(d.day)} ${esc(d.wd)}</p>
+    <ul class="keys">${keys.map((k,i)=>`<li><span>${i+1}</span>${esc(k.replace(/^[①②③]\s*/,''))}</li>`).join('')}</ul>
+    <div style="margin-top:14px">${simple
+      ?dl([['숙박',d.stay],['이동',d.move],['꼭 먹기',d.eat]])
+      :dl([['숙박',d.stay],['이동',d.move],['꼭 먹기',d.eat],['예약·확인',d.book,1],['Plan B',d.planb]])}</div>
+    <p class="quote">“${esc(d.line)}”</p></div>`;
+}
+
+/* ---------- missions ---------- */
+function misList(items){
+  if(!items.length) return `<div class="card">오늘은 지정된 미션이 없습니다. 사진 한 장이라도 남겨두기.</div>`;
+  return `<div class="mis">${items.map(m=>`
+    <label><input type="checkbox" data-mis="${m.id}"${gv('mis/'+m.id)?' checked':''}>
+    <div><span class="mtx">${esc(m.text)}</span>
+    ${m.say?`<span class="say">${esc(m.say)}</span>`:''}
+    <span class="tagline">${esc(m.kind)}${m.day!=='pre'?' · '+esc(m.day):' · 출발 전'}</span>
+    </div></label>`).join('')}</div>`;
+}
+function misStamps(){
+  const total=MISSIONS.length, done=MISSIONS.filter(m=>gv('mis/'+m.id)).length;
+  const byDay=['pre'].concat(DAYS.map(d=>d.day));
+  return `<div class="scoreboard"><div class="big">${done} / ${total}</div>
+    <p class="cap">완료한 미션</p></div>
+    <div class="stamps">${MISSIONS.map(m=>`<i class="${gv('mis/'+m.id)?'on':''}" title="${esc(m.text)}">${gv('mis/'+m.id)?'✓':''}</i>`).join('')}</div>`;
+}
+
+/* ---------- 지출 · 영수증 ---------- */
+const CATS=['식사','주유','주차·톨','입장·체험','쇼핑','교통','기타'];
+let FORM={day:null,amt:'',cur:'USD',cat:'식사',pay:'카드',who:'dad',memo:''};
+let PENDING=null;          /* 저장 대기 중인 압축 사진 {blob,url} */
+let SHOT_URLS=[];          /* 화면에 띄운 사진 주소 — 다시 그릴 때 정리 */
+
+function expList(){
+  return Object.keys(KV).filter(k=>k.indexOf('exp/')===0)
+    .map(k=>({id:k.slice(4),...KV[k].v}))
+    .filter(e=>e&&!e.del)
+    .sort((a,b)=>(a.day===b.day)?(a.ts-b.ts):(dayDate(a.day)-dayDate(b.day)));
+}
+const rate=()=>Number(gv('rate',''))||0;
+function usd(e){ return e.cur==='USD'?Number(e.amt)||0:(rate()?(Number(e.amt)||0)/rate():0); }
+function krw(e){ return e.cur==='KRW'?Number(e.amt)||0:(Number(e.amt)||0)*rate(); }
+const won=n=>Math.round(n).toLocaleString('ko-KR');
+const dollar=n=>n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+/* 사진 저장소 (IndexedDB) — 용량이 큰 사진은 여기 둡니다 */
+let _db=null;
+function idb(){
+  return new Promise((res,rej)=>{
+    if(_db) return res(_db);
+    if(typeof indexedDB==='undefined') return rej(new Error('no-idb'));
+    const rq=indexedDB.open('trip2026',1);
+    rq.onupgradeneeded=()=>{const db=rq.result;if(!db.objectStoreNames.contains('shots'))db.createObjectStore('shots');};
+    rq.onsuccess=()=>{_db=rq.result;res(_db);};
+    rq.onerror=()=>rej(rq.error);
+  });
+}
+function shotOp(mode,fn){
+  return idb().then(db=>new Promise((res,rej)=>{
+    const t=db.transaction('shots',mode), st=t.objectStore('shots'), r=fn(st);
+    t.oncomplete=()=>res(r&&'result' in r?r.result:null);
+    t.onerror=()=>rej(t.error);
+  }));
+}
+const shotPut=(id,blob)=>shotOp('readwrite',st=>st.put(blob,id));
+const shotGet=id=>shotOp('readonly',st=>st.get(id));
+const shotDel=id=>shotOp('readwrite',st=>st.delete(id));
+
+/* 사진을 1400px·JPEG로 줄여 저장합니다. 원본은 폰 사진앱에 그대로 남습니다 */
+function compress(file){
+  return new Promise((res,rej)=>{
+    const url=URL.createObjectURL(file), img=new Image();
+    img.onload=()=>{
+      const sc=Math.min(1,1400/Math.max(img.width,img.height));
+      const c=document.createElement('canvas');
+      c.width=Math.max(1,Math.round(img.width*sc));
+      c.height=Math.max(1,Math.round(img.height*sc));
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      URL.revokeObjectURL(url);
+      c.toBlob(b=>b?res(b):rej(new Error('변환 실패')),'image/jpeg',0.68);
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('읽기 실패'));};
+    img.src=url;
+  });
+}
+
+function viewExpense(){
+  const list=expList();
+  const tUSD=list.reduce((a,e)=>a+usd(e),0);
+  const tKRW=list.reduce((a,e)=>a+krw(e),0);
+  const shots=list.filter(e=>e.img).length;
+  if(!FORM.day) FORM.day=todayKey||DAYS[0].day;
+
+  let html=`<div class="sum"><div class="big">$${dollar(tUSD)}</div>
+    ${rate()?`<div class="krw">약 ${won(tKRW)}원</div>`:''}
+    <p class="cap">${list.length}건 · 영수증 ${shots}장${rate()?'':' · 환율을 넣으면 원화로도 보입니다'}</p></div>`;
+
+  /* 입력 */
+  html+=`<div class="form">
+    <div class="row two">
+      <div><label class="lab" for="fAmt">금액</label>
+        <input type="number" id="fAmt" inputmode="decimal" step="0.01" value="${esc(FORM.amt)}" placeholder="0.00"></div>
+      <div><label class="lab" for="fCur">통화</label>
+        <select id="fCur"><option value="USD"${FORM.cur==='USD'?' selected':''}>USD</option>
+        <option value="KRW"${FORM.cur==='KRW'?' selected':''}>KRW</option></select></div>
+    </div>
+    <div class="row"><label class="lab">분류</label>
+      <div class="chips">${CATS.map(c=>`<button type="button" data-fcat="${c}" aria-pressed="${FORM.cat===c}">${c}</button>`).join('')}</div>
+    </div>
+    <div class="row two">
+      <div><label class="lab" for="fDay">날짜</label>
+        <select id="fDay">${DAYS.map(d=>`<option value="${d.day}"${FORM.day===d.day?' selected':''}>${d.day} ${d.wd}</option>`).join('')}</select></div>
+      <div><label class="lab">결제</label>
+        <div class="chips">${['카드','현금'].map(x=>`<button type="button" data-fpay="${x}" aria-pressed="${FORM.pay===x}">${x}</button>`).join('')}</div></div>
+    </div>
+    <div class="row"><label class="lab">누가 냈나</label>
+      <div class="chips">${[['dad','아빠'],['son','아들']].map(x=>`<button type="button" data-fwho="${x[0]}" aria-pressed="${FORM.who===x[0]}">${x[1]}</button>`).join('')}</div>
+    </div>
+    <div class="row"><label class="lab" for="fMemo">내용</label>
+      <input type="text" id="fMemo" value="${esc(FORM.memo)}" placeholder="예: Curry Village 피자"></div>
+    <div class="shotpick">
+      <label for="fShot">영수증 사진 고르기</label>
+      <input type="file" id="fShot" accept="image/*">
+      ${PENDING?`<img src="${PENDING.url}" alt="선택한 영수증"><span class="st">준비됨</span>`
+               :`<span class="st" id="shotSt">사진앱에 먼저 찍어두면 원본도 남습니다</span>`}
+    </div>
+    <button class="btn" id="expSave">지출 기록하기</button>
+  </div>`;
+
+  /* 환율 */
+  html+=`<div class="form" style="padding:12px 15px">
+    <label class="lab" for="fRate">환율 (1달러 = ? 원) · 한 번만 넣어두면 됩니다</label>
+    <input type="number" id="fRate" inputmode="decimal" value="${esc(gv('rate',''))}" placeholder="1400"></div>`;
+
+  if(!list.length){
+    html+=`<div class="card">아직 기록이 없습니다. 식당에서 계산 끝나면 바로 한 건 넣어두는 게 가장 편합니다.</div>`;
+    return html;
+  }
+
+  /* 분류별 합계 */
+  const byCat={};
+  list.forEach(e=>{byCat[e.cat]=(byCat[e.cat]||0)+usd(e);});
+  const maxCat=Math.max.apply(null,Object.values(byCat));
+  html+=`<h2>분류별</h2><div class="catbar">${CATS.filter(c=>byCat[c]).map(c=>`
+    <div class="ln"><div>${c}<div class="tr"><i style="width:${Math.round(byCat[c]/maxCat*100)}%"></i></div></div>
+    <span class="v">$${dollar(byCat[c])}</span></div>`).join('')}</div>`;
+
+  /* 날짜별 목록 */
+  html+=`<h2>기록</h2>`;
+  DAYS.forEach(d=>{
+    const rows=list.filter(e=>e.day===d.day);
+    if(!rows.length) return;
+    const sub=rows.reduce((a,e)=>a+usd(e),0);
+    html+=`<h3 class="sub">${d.day} ${d.wd} · $${dollar(sub)}</h3>`;
+    html+=rows.map(e=>`<div class="exp">
+      ${e.img?`<img class="th" data-shot="${esc(e.id)}" data-zoom="${esc(e.id)}" alt="영수증">`
+             :`<span class="noth">영수증<br>없음</span>`}
+      <div><span class="amt">${e.cur==='USD'?'$'+dollar(Number(e.amt)||0):won(Number(e.amt)||0)+'원'}</span>
+        <div class="meta">${esc(e.cat)} · ${esc(e.pay)} · ${e.who==='son'?'아들':'아빠'}${e.memo?'<br>'+esc(e.memo):''}</div></div>
+      <button class="del" data-expdel="${esc(e.id)}">삭제</button></div>`).join('');
+  });
+
+  html+=`<h2>정산 내보내기</h2>
+    <p class="lede">엑셀에 붙일 표로 복사하거나, 영수증까지 한 장의 PDF로 저장할 수 있습니다.</p>
+    <button class="mini" id="csvBtn">표로 복사하기</button>
+    <button class="mini" id="printBtn">영수증까지 PDF로 저장</button>
+    <p class="lede" id="csvMsg" style="margin:4px 0 0"></p>
+    <textarea class="io" id="csvOut" readonly hidden></textarea>`;
+  return html;
+}
+
+/* 목록·인쇄에 쓸 사진을 IndexedDB에서 꺼내 붙입니다 */
+function hydrateShots(root){
+  SHOT_URLS.forEach(u=>{try{URL.revokeObjectURL(u);}catch(e){}});
+  SHOT_URLS=[];
+  const nodes=(root||document).querySelectorAll('[data-shot]');
+  nodes.forEach(el=>{
+    shotGet(el.getAttribute('data-shot')).then(b=>{
+      if(!b) return;
+      const u=URL.createObjectURL(b); SHOT_URLS.push(u); el.src=u;
+    }).catch(()=>{});
+  });
+}
+
+async function saveExpense(){
+  const amt=(document.getElementById('fAmt')||{}).value;
+  const memo=(document.getElementById('fMemo')||{}).value||'';
+  if(!amt||isNaN(Number(amt))||Number(amt)<=0){
+    const st=document.getElementById('shotSt'); if(st) st.textContent='금액을 먼저 넣어주세요.';
+    return;
+  }
+  const id=String(Date.now()).slice(-8)+Math.random().toString(36).slice(2,5);
+  let hasImg=false;
+  if(PENDING){
+    try{ await shotPut(id,PENDING.blob); hasImg=true; }catch(e){ hasImg=false; }
+    try{ URL.revokeObjectURL(PENDING.url); }catch(e){}
+    PENDING=null;
+  }
+  sv('exp/'+id,{day:FORM.day,amt:Number(amt),cur:FORM.cur,cat:FORM.cat,pay:FORM.pay,
+                who:FORM.who,memo:memo,img:hasImg,ts:Date.now()});
+  FORM.amt=''; FORM.memo='';
+  if(navigator.storage&&navigator.storage.persist) navigator.storage.persist().catch(()=>{});
+  render();
+}
+
+function csvText(){
+  const rows=[['날짜','분류','금액','통화','달러환산','결제','지불','내용','영수증']];
+  expList().forEach(e=>rows.push([e.day,e.cat,e.amt,e.cur,usd(e).toFixed(2),e.pay,
+    e.who==='son'?'아들':'아빠',(e.memo||'').replace(/[\t\n]/g,' '),e.img?'있음':'']));
+  const t=expList().reduce((a,e)=>a+usd(e),0);
+  rows.push(['합계','','','',t.toFixed(2),'','','','']);
+  return rows.map(r=>r.join('\t')).join('\n');
+}
+
+function buildPrint(){
+  const list=expList();
+  const t=list.reduce((a,e)=>a+usd(e),0);
+  const area=document.getElementById('printArea');
+  area.innerHTML=`<h1>아빠와 아들 캘리포니아 · 지출 정산</h1>
+    <p class="sub">2026.9.18–9.26 · ${list.length}건 · 합계 $${dollar(t)}${rate()?` (약 ${won(list.reduce((a,e)=>a+krw(e),0))}원, 1달러 ${won(rate())}원 기준)`:''}</p>
+    <table><thead><tr><th>날짜</th><th>분류</th><th>내용</th><th>결제</th><th>지불</th><th class="n">금액</th></tr></thead>
+    <tbody>${list.map(e=>`<tr><td>${esc(e.day)}</td><td>${esc(e.cat)}</td><td>${esc(e.memo||'')}</td>
+      <td>${esc(e.pay)}</td><td>${e.who==='son'?'아들':'아빠'}</td>
+      <td class="n">${e.cur==='USD'?'$'+dollar(Number(e.amt)||0):won(Number(e.amt)||0)+'원'}</td></tr>`).join('')}
+    <tr><td colspan="5"><b>합계</b></td><td class="n"><b>$${dollar(t)}</b></td></tr></tbody></table>
+    <div class="shots">${list.filter(e=>e.img).map(e=>`<figure>
+      <img data-shot="${esc(e.id)}" alt="영수증">
+      <figcaption>${esc(e.day)} · ${esc(e.cat)} · ${e.cur==='USD'?'$'+dollar(Number(e.amt)||0):won(Number(e.amt)||0)+'원'}${e.memo?' · '+esc(e.memo):''}</figcaption>
+      </figure>`).join('')}</div>`;
+  hydrateShots(area);
+}
+
+/* ---------- views ---------- */
+function viewTodaySon(){
+  let html='';
+  if(dLeft>0){
+    html+=`<div class="hero"><p class="head">출발 준비</p><p class="date">출발까지 ${dLeft}일</p>
+      <p style="margin:8px 0 0;color:var(--soft);font-size:14px">출발 전 미션 3개부터 끝내면 됩니다.</p></div>`;
+    html+=`<h2>출발 전 미션</h2>`+misList(MISSIONS.filter(m=>m.day==='pre'));
+    html+=`<h2>첫날 미리보기</h2>`+dayCard(DAYS[0],'9/18 도착일',true);
+  } else if(todayKey){
+    const i=dayIndex(todayKey);
+    html+=spine(todayKey)+dayCard(DAYS[i],`여행 ${i+1}일차`,true);
+    html+=`<h2>오늘 미션</h2>`+misList(MISSIONS.filter(m=>m.day===todayKey));
+    html+=`<h2>오늘 한마디</h2>`+logCard(todayKey);
+    html+=`<h2>오늘 시간표</h2>`+schedRows(todayKey,true);
+  } else {
+    html+=`<div class="hero"><p class="head">여행 종료</p><p class="date">잘 다녀왔습니다</p></div>`;
+    html+=misStamps();
+  }
+  return html;
+}
+function viewTodayDad(){
+  let html='';
+  if(dLeft>0){
+    html+=`<div class="hero"><p class="head">출발 준비 기간</p><p class="date">출발까지 ${dLeft}일</p>
+      <p style="margin:8px 0 0;color:var(--soft);font-size:14px">남은 예약·확인부터 끝내면 됩니다. 9/18 첫날은 회복이 일정입니다.</p></div>`;
+    const urgent=DATA.bookingTodo.map((b,i)=>({id:'bk'+i,text:b.item,due:b.status,memo:b.memo,url:b.url})).filter(x=>!gv('chk/'+x.id));
+    html+=`<h2>먼저 끝낼 것</h2>`+(urgent.length?checklist(urgent):`<div class="card">예약 체크리스트를 모두 확인했습니다.</div>`);
+    html+=`<h2>아들 출발 전 미션</h2>`+misList(MISSIONS.filter(m=>m.day==='pre'));
+    html+=`<h2>첫날 미리보기</h2>`+dayCard(DAYS[0],'9/18 도착일');
+  } else if(todayKey){
+    const i=dayIndex(todayKey);
+    html+=spine(todayKey)+dayCard(DAYS[i],`여행 ${i+1}일차`);
+    html+=`<h2>오늘 시간표</h2>`+schedRows(todayKey);
+    html+=`<h2>아들 오늘 미션</h2>`+misList(MISSIONS.filter(m=>m.day===todayKey));
+    if(DAYS[i+1]){const n=DAYS[i+1];
+      html+=`<h2>내일</h2><div class="card"><h3>${esc(n.day)} ${esc(n.wd)}</h3>
+        ${dl([['핵심',n.keys],['숙박',n.stay],['예약·확인',n.book,1]])}</div>`;}
+  } else {
+    html+=`<div class="hero"><p class="head">여행 종료</p><p class="date">잘 다녀왔습니다</p></div>`+spine(null);
+  }
+  return html;
+}
+function viewMission(){
+  const groups=[{k:'pre',t:'출발 전'}].concat(DAYS.map(d=>({k:d.day,t:d.day+' '+d.wd})));
+  return `<h2>미션 보드</h2><p class="lede">끝낸 미션을 체크하면 스탬프가 채워집니다.</p>`
+    + misStamps()
+    + groups.map(g=>{
+        const items=MISSIONS.filter(m=>m.day===g.k);
+        return items.length?`<h3 class="sub">${esc(g.t)}</h3>`+misList(items):'';
+      }).join('');
+}
+let schedDay=todayKey||DAYS[0].day;
+function viewSched(){
+  const d=DAYS[dayIndex(schedDay)];
+  return spine(schedDay)+`<h2>${esc(schedDay)} ${esc(d.wd)}</h2>`+schedRows(schedDay,!isDad());
+}
+function viewBooking(){
+  const badge=k=>k==='호텔'?'pine':(k==='렌터카'?'steel':'gg');
+  let html=`<h2>확정된 예약</h2><p class="lede">숙소·렌터카·경기 확정 내역입니다.</p>`;
+  html+=DATA.bookings.map(b=>`<div class="card"><h3>${esc(b.name)}</h3>
+    <p style="margin:-4px 0 9px"><span class="kind ${badge(b.kind)}">${esc(b.kind)}</span><span class="kind">${esc(b.date)}</span></p>
+    ${dl([['위치',b.loc],['체크인',b.inn],['체크아웃',b.outt],['결제·조건',b.pay],['메모',b.memo]])}</div>`).join('');
+  const items=DATA.bookingTodo.map((b,i)=>({id:'bk'+i,text:b.item,due:b.status,memo:b.memo,url:b.url}));
+  html+=`<h2>아직 잡아야 할 것</h2>`+bar(items.filter(x=>gv('chk/'+x.id)).length,items.length)+checklist(items);
+  return html;
+}
+function viewSpots(){
+  let html=`<h2>스팟 현장 가이드</h2><p class="lede">${isDad()?'도착 직전에 해당 스팟만 펼쳐 보세요.':'아빠와 해볼 것이 스팟마다 하나씩 있습니다.'}</p>`;
+  html+=DATA.spots.map(s=>`<details class="spot"><summary>${esc(s.name)}</summary><div class="body">
+    ${isDad()?dl([['꼭 할 것',s.must],['시간 운영',s.timing],['주의',s.care,1],['아들과',s.withSon],['Plan B',s.planb]])
+             :dl([['꼭 할 것',s.must],['아빠와',s.withSon,1],['주의',s.care]])}
+    </div></details>`).join('');
+  return html;
+}
+function viewFood(){
+  const pk=p=>p==='최우선'?'gg':(p==='높음'?'pine':'');
+  let html=`<h2>하루 한 끼만 기억에 남게</h2>`;
+  html+=DATA.food.map(f=>`<div class="card${f.prio==='최우선'?' flag':''}"><h3>${esc(f.dish)}</h3>
+    <p style="margin:-4px 0 9px"><span class="kind ${pk(f.prio)}">${esc(f.prio)}</span>
+    <span class="kind">${esc(f.when)}</span>${f.stamp?`<span class="kind gold">버거 ${esc(f.stamp)}</span>`:''}</p>
+    ${dl([['후보',f.place],['주문',f.order],['메모',f.memo]])}</div>`).join('');
+  return html;
+}
+function viewBurger(){
+  let html=`<h2>버거 챔피언십</h2><p class="lede">패티와 감자튀김을 각각 10점 만점으로. 옆에서 같이 채점해 바로 넣으세요.</p>`;
+  html+=`<div id="champ"></div>`;
+  html+=DATA.burger.map((b,i)=>{
+    const s=scoreOf(i);
+    const f=(who,part)=>`<input type="number" min="0" max="10" inputmode="numeric"
+        data-sc="${i}" data-who="${who}" data-part="${part}"
+        value="${s[who+part]==null?'':esc(s[who+part])}" placeholder="–">`;
+    const rowCls=w=>((w==='dad')===isDad())?'score mine':'score';
+    return `<div class="bg"><div class="top"><h3>${esc(b.brand)}</h3><span class="kind gold">${esc(b.when)}</span></div>
+      <p class="menu">${esc(b.menu)}</p>
+      <div class="score"><span></span><span class="ph">패티</span><span class="ph">감튀</span><span class="ph">총점</span></div>
+      <div class="${rowCls('dad')}"><span class="who2">아빠</span>${f('dad','P')}${f('dad','F')}<span class="tot" id="tot-dad-${i}"></span></div>
+      <div class="${rowCls('son')}"><span class="who2">아들</span>${f('son','P')}${f('son','F')}<span class="tot" id="tot-son-${i}"></span></div>
+      <input class="note" data-note="${i}" value="${esc(gv('note/'+i,''))}" placeholder="한줄평 — 둘이 같이 씁니다">
+    </div>`;
+  }).join('');
+  return html;
+}
+function renderChamp(){
+  const box=document.getElementById('champ'); if(!box) return;
+  const sum=(s,who)=>(Number(s[who+'P'])||0)+(Number(s[who+'F'])||0);
+  const scored=DATA.burger.map((b,i)=>({b,s:scoreOf(i)}))
+    .filter(x=>Object.values(x.s).some(v=>v!==''&&v!=null));
+  if(!scored.length){
+    box.innerHTML=`<div class="champ"><p class="empty" style="margin:0">점수를 넣으면 아빠 PICK · 아들 PICK · 부자 CHAMPION이 여기에 나옵니다.</p></div>`;
+    return;
+  }
+  const best=w=>scored.slice().sort((a,b)=>sum(b.s,w)-sum(a.s,w))[0];
+  const dad=best('dad'), son=best('son');
+  const tot=scored.slice().sort((a,b)=>(sum(b.s,'dad')+sum(b.s,'son'))-(sum(a.s,'dad')+sum(a.s,'son')))[0];
+  box.innerHTML=`<div class="champ">
+    <div class="row"><span>아빠 PICK</span><b>${esc(dad.b.brand)} · ${sum(dad.s,'dad')}</b></div>
+    <div class="row"><span>아들 PICK</span><b>${esc(son.b.brand)} · ${sum(son.s,'son')}</b></div>
+    <div class="row"><span>부자여행 CHAMPION</span><b>${esc(tot.b.brand)} · ${sum(tot.s,'dad')+sum(tot.s,'son')}</b></div></div>`;
+}
+function renderTotals(){
+  DATA.burger.forEach((b,i)=>{
+    const s=scoreOf(i);
+    ['dad','son'].forEach(w=>{
+      const el=document.getElementById(`tot-${w}-${i}`); if(!el) return;
+      const any=(s[w+'P']!=null&&s[w+'P']!=='')||(s[w+'F']!=null&&s[w+'F']!=='');
+      el.textContent=any?((Number(s[w+'P'])||0)+(Number(s[w+'F'])||0)):'–';
+      el.style.color=any?'var(--ink)':'var(--faint)';
+    });
+  });
+  renderChamp();
+}
+function logCard(day){
+  const d=DAYS[dayIndex(day)]||{day:day,wd:''};
+  const rec=logOf(day);
+  const slot=(who,label)=>{
+    const val=rec[who]||'';
+    return `<div class="slot"><p class="lab">${label}</p>
+      <textarea data-log="${day}" data-lw="${who}" placeholder="오늘 가장 좋았던 장면 한 줄">${esc(val)}</textarea></div>`;
+  };
+  return `<div class="log"><div class="hd"><span class="d">${esc(day)} ${esc(d.wd||'')}</span>
+    <span class="kind">${esc((REGION[day]||[''])[0])}</span></div>
+    ${slot('dad','아빠')}${slot('son','아들')}</div>`;
+}
+function viewLog(){
+  const written=DAYS.filter(d=>{const r=logOf(d.day);return (r.dad&&r.dad.trim())||(r.son&&r.son.trim());}).length;
+  let html=`<h2>하루 한마디</h2><p class="lede">매일 저녁 한 줄씩. 폰을 건네며 둘이 같이 써도 됩니다.</p>`;
+  html+=bar(written,DAYS.length);
+  html+=DAYS.map(d=>logCard(d.day)).join('');
+  html+=`<h2>미션 현황</h2>`+misStamps();
+  html+=`<h2>기록 합치기</h2>
+    <p class="lede">두 폰의 기록을 하나로 모을 때만 쓰면 됩니다. 같은 항목은 나중에 쓴 쪽이 남습니다.</p>
+    <details class="spot"><summary>내 기록 내보내기 / 받은 기록 합치기</summary><div class="body">
+      <p class="lab" style="font-size:12px;color:var(--faint);margin:0 0 4px">내 기록</p>
+      <textarea class="io" id="ioOut" readonly>${esc(JSON.stringify(KV))}</textarea>
+      <button class="mini" id="copyBtn">복사하기</button>
+      <p class="lab" style="font-size:12px;color:var(--faint);margin:10px 0 4px">상대에게 받은 기록 붙여넣기</p>
+      <textarea class="io" id="ioIn" placeholder="여기에 붙여넣고 합치기를 누르세요"></textarea>
+      <button class="mini" id="mergeBtn">합치기</button>
+      <p class="lede" id="ioMsg" style="margin:6px 0 0"></p>
+    </div></details>`;
+  return html;
+}
+function viewShop(){
+  const items=DATA.shopping.map((s,i)=>({...s,id:'sh'+i}));
+  let html=`<h2>쇼핑 플랜</h2><p class="lede">Livermore는 실속, Union Square는 기념.</p>`
+    +bar(items.filter(x=>gv('chk/'+x.id)).length,items.length);
+  html+=items.map(s=>`<div class="card"><h3>${esc(s.store)}</h3>
+    <p style="margin:-4px 0 9px"><span class="kind ${s.prio==='A'?'gg':(s.prio==='B'?'pine':'')}">${esc(s.prio)} 순위</span>
+    <span class="kind">${esc(s.area)}</span></p>
+    ${dl([['목적',s.why],['메모',s.memo]])}
+    <input class="note" data-buy="${s.id}" value="${esc(gv('buy/'+s.id,''))}" placeholder="살 것 — 둘이 같이 적습니다">
+    <label style="display:flex;gap:9px;align-items:center;margin-top:10px;font-size:14px;cursor:pointer">
+      <input type="checkbox" data-chk="${s.id}"${gv('chk/'+s.id)?' checked':''} style="width:19px;height:19px;accent-color:var(--pine)">
+      구매 완료</label></div>`).join('');
+  return html;
+}
+function viewPrep(){
+  const dep=DATA.departCheck.map((d,i)=>({id:'dc'+i,text:`${d.cat} · ${d.item}`,due:d.due,memo:d.memo}));
+  const pr=DATA.prep.map((p,i)=>({id:'pp'+i,text:`${p.cat} · ${p.item}`,due:p.when,
+    memo:[p.dad?'아빠':'',p.son?'아들':''].filter(Boolean).join('·')+(p.memo?' / '+p.memo:'')}));
+  let html=`<h2>출발 전 최종 체크</h2>`+bar(dep.filter(x=>gv('chk/'+x.id)).length,dep.length)+checklist(dep);
+  html+=`<h2>사전 준비물</h2>`+bar(pr.filter(x=>gv('chk/'+x.id)).length,pr.length)+checklist(pr);
+  html+=`<h2>운전·결제 원칙</h2><p class="lede">현장에서 되묻는 문장까지 함께 적었습니다.</p>`;
+  html+=DATA.driveTips.map(t=>`<div class="tip-card${t.status==='필수'?' flag':''}">
+    <div class="hd"><span class="kind ${t.status==='필수'?'gg':'pine'}">${esc(t.cat)}</span><span class="kind">${esc(t.status)}</span></div>
+    <p class="pt">${esc(t.point)}</p>${dl([['이번 여행',t.apply],['현장 확인',t.check,1]])}</div>`).join('');
+  return html;
+}
+function viewPrepSon(){
+  const mine=DATA.prep.filter(p=>p.son).map((p,i)=>({id:'sp'+i,text:`${p.cat} · ${p.item}`,due:p.when,memo:p.memo}));
+  let html=`<h2>내가 챙길 것</h2><p class="lede">아들 표시가 있는 준비물만 모았습니다.</p>`;
+  html+=bar(mine.filter(x=>gv('chk/'+x.id)).length,mine.length)+checklist(mine);
+  return html;
+}
+function viewTalk(){
+  const mySay=MISSIONS.filter(m=>m.say);
+  let html='';
+  if(!isDad()){
+    html+=`<h2>내가 말할 문장</h2><p class="lede">미션으로 직접 말해볼 문장입니다. 먼저 이것만 외워도 충분합니다.</p>`;
+    html+=mySay.map(m=>`<div class="ph-card"><p class="en">${esc(m.say)}</p>
+      <p class="ko">${esc(m.text)}</p><span class="mission">${esc(m.day==='pre'?'출발 전':m.day)}</span></div>`).join('');
+  }
+  const cats=[...new Set(DATA.phrases.map(p=>p.cat))];
+  html+=`<h2>상황별 회화</h2><p class="lede">아들 미션 표시가 있는 문장은 아들이 직접 말해보기.</p>`;
+  html+=cats.map(c=>`<h3 class="sub">${esc(c)}</h3>`+DATA.phrases.filter(p=>p.cat===c).map(p=>`
+    <div class="ph-card"><p class="en">${esc(p.en)}</p><p class="ko">${esc(p.ko)}</p>
+    ${p.tip?`<p class="tip">${esc(p.tip)}</p>`:''}
+    ${p.mission?`<span class="mission">아들 미션 · ${esc(p.mission)}</span>`:''}</div>`).join('')).join('');
+  return html;
+}
+
+/* ---------- shell ---------- */
+const TABS_DAD=[['today','오늘',viewTodayDad],['sched','일정',viewSched],['book','예약',viewBooking],
+  ['spot','스팟',viewSpots],['food','먹기',viewFood],['burger','버거',viewBurger],['shop','쇼핑',viewShop],
+  ['exp','비용',viewExpense],['prep','준비',viewPrep],['talk','회화',viewTalk],
+  ['log','기록',viewLog],['mis','미션',viewMission]];
+const TABS_SON=[['today','오늘',viewTodaySon],['mis','미션',viewMission],['sched','일정',viewSched],
+  ['burger','버거',viewBurger],['exp','비용',viewExpense],['talk','회화',viewTalk],
+  ['spot','스팟',viewSpots],['log','기록',viewLog],['prep','내 짐',viewPrepSon]];
+const tabSet=()=>isDad()?TABS_DAD:TABS_SON;
+let cur='today';
+
+function render(){
+  const set=tabSet();
+  if(!set.some(t=>t[0]===cur)) cur='today';
+  document.getElementById('tabs').innerHTML=set.map(([id,label])=>
+    `<button role="tab" data-tab="${id}" aria-selected="${cur===id}">${label}</button>`).join('');
+  document.getElementById('views').innerHTML=`<section>${set.find(t=>t[0]===cur)[2]()}</section>`;
+  if(cur==='burger') renderTotals();
+  if(cur==='exp') hydrateShots(document.getElementById('views'));
+  document.getElementById('whoBtn').textContent=meLab()+' 모드 · 바꾸기';
+  updateStatus();
+  document.getElementById('foot').innerHTML =
+    '체크·점수·한마디는 각 폰에 저장됩니다. 두 폰의 기록은 기록 탭에서 합칠 수 있습니다.<br>'
+    + '예약번호와 금액은 이 페이지에 넣지 않았습니다 — 바우처 메일을 확인하세요.';
+}
+function go(tab){cur=tab;render();window.scrollTo({top:0});}
+
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-role]');
+  if(g){pickRole(g.dataset.role);return;}
+  const w=e.target.closest('#whoBtn');
+  if(w){const gate=document.getElementById('gate');gate.style.display='';gate.hidden=false;return;}
+  const fc=e.target.closest('[data-fcat]'); if(fc){FORM.cat=fc.dataset.fcat;render();return;}
+  const fp=e.target.closest('[data-fpay]'); if(fp){FORM.pay=fp.dataset.fpay;render();return;}
+  const fw=e.target.closest('[data-fwho]'); if(fw){FORM.who=fw.dataset.fwho;render();return;}
+  if(e.target.closest('#expSave')){saveExpense();return;}
+  const ed=e.target.closest('[data-expdel]');
+  if(ed){
+    const id=ed.dataset.expdel;
+    sv('exp/'+id,{del:true});      /* 합치기에서 되살아나지 않게 삭제 표시로 남깁니다 */
+    shotDel(id).catch(()=>{});
+    render(); return;
+  }
+  const zm=e.target.closest('[data-zoom]');
+  if(zm){
+    shotGet(zm.dataset.zoom).then(b=>{
+      if(!b) return;
+      const u=URL.createObjectURL(b); SHOT_URLS.push(u);
+      document.getElementById('lbImg').src=u;
+      document.getElementById('lightbox').hidden=false;
+    }).catch(()=>{});
+    return;
+  }
+  if(e.target.closest('#lbClose')||e.target.id==='lightbox'){
+    document.getElementById('lightbox').hidden=true; return;
+  }
+  if(e.target.closest('#csvBtn')){
+    const ta=document.getElementById('csvOut'), msg=document.getElementById('csvMsg');
+    ta.hidden=false; ta.value=csvText();
+    ta.removeAttribute('readonly'); ta.select(); ta.setSelectionRange(0,ta.value.length);
+    let ok=false; try{ ok=document.execCommand('copy'); }catch(err){}
+    ta.setAttribute('readonly','');
+    if(!ok&&navigator.clipboard){navigator.clipboard.writeText(ta.value).then(()=>{msg.textContent='복사했습니다. 엑셀에 붙여넣으면 칸이 나뉩니다.';});}
+    else msg.textContent=ok?'복사했습니다. 엑셀에 붙여넣으면 칸이 나뉩니다.':'아래 칸을 길게 눌러 복사하세요.';
+    return;
+  }
+  if(e.target.closest('#printBtn')){
+    buildPrint();
+    const msg=document.getElementById('csvMsg');
+    if(msg) msg.textContent='인쇄 화면에서 프린터 대신 PDF로 저장을 고르세요.';
+    setTimeout(()=>window.print(),600);
+    return;
+  }
+  const t=e.target.closest('[data-tab]'); if(t){go(t.dataset.tab);return;}
+  const d=e.target.closest('[data-goday]'); if(d){schedDay=d.dataset.goday;go('sched');return;}
+});
+document.addEventListener('change',e=>{
+  const fs=e.target.closest('#fShot');
+  if(fs){
+    const f=fs.files&&fs.files[0]; if(!f) return;
+    const st=document.getElementById('shotSt'); if(st) st.textContent='사진 줄이는 중…';
+    compress(f).then(b=>{
+      if(PENDING){try{URL.revokeObjectURL(PENDING.url);}catch(err){}}
+      PENDING={blob:b,url:URL.createObjectURL(b)};
+      render();
+    }).catch(()=>{ if(st) st.textContent='이 사진을 읽지 못했습니다. 다른 사진으로 해보세요.'; });
+    return;
+  }
+  const cur2=e.target.closest('#fCur'); if(cur2){FORM.cur=cur2.value;return;}
+  const dy=e.target.closest('#fDay'); if(dy){FORM.day=dy.value;return;}
+  const c=e.target.closest('[data-chk]');
+  if(c){sv('chk/'+c.dataset.chk,c.checked);if(['book','prep','shop','today'].includes(cur))render();return;}
+  const m=e.target.closest('[data-mis]');
+  if(m){sv('mis/'+m.dataset.mis,m.checked);render();}
+});
+document.addEventListener('input',e=>{
+  const fa=e.target.closest('#fAmt'); if(fa){FORM.amt=fa.value;return;}
+  const fm=e.target.closest('#fMemo'); if(fm){FORM.memo=fm.value;return;}
+  const fr=e.target.closest('#fRate'); if(fr){sv('rate',fr.value);return;}
+  const s=e.target.closest('[data-sc]');
+  if(s){sv('sc/'+s.dataset.sc+'/'+s.dataset.who+s.dataset.part,
+      s.value===''?'':Math.max(0,Math.min(10,Number(s.value))));
+    renderTotals();return;}
+  const n=e.target.closest('[data-note]'); if(n){sv('note/'+n.dataset.note,n.value);return;}
+  const b=e.target.closest('[data-buy]'); if(b){sv('buy/'+b.dataset.buy,b.value);return;}
+  const l=e.target.closest('[data-log]');
+  if(l){sv('log/'+l.dataset.log+'/'+l.dataset.lw,l.value);}
+});
+
+function pickRole(role){
+  ME.role=role;
+  writeMe();
+  const gate=document.getElementById('gate');
+  gate.hidden=true; gate.style.display='none';
+  render();
+  window.scrollTo({top:0});
+}
+function stamp(){
+  const el=document.getElementById('stamp');
+  if(dLeft>0) el.innerHTML=`출발까지 <b>D-${dLeft}</b>`;
+  else if(todayKey) el.innerHTML=`여행 <b>${dayIndex(todayKey)+1}일차</b> · ${todayKey}`;
+  else el.innerHTML='여행 기록';
+}
+/* 저장·불러오기 동작 */
+document.addEventListener('click',e=>{
+  if(e.target.closest('#copyBtn')){
+    const ta=document.getElementById('ioOut'), msg=document.getElementById('ioMsg');
+    ta.removeAttribute('readonly'); ta.select(); ta.setSelectionRange(0,ta.value.length);
+    let ok=false;
+    try{ ok=document.execCommand('copy'); }catch(err){}
+    ta.setAttribute('readonly','');
+    if(!ok && navigator.clipboard){ navigator.clipboard.writeText(ta.value).then(()=>{msg.textContent='복사했습니다.';}); }
+    else msg.textContent = ok ? '복사했습니다. 상대에게 그대로 보내세요.' : '길게 눌러 전체 선택 후 복사하세요.';
+    return;
+  }
+  if(e.target.closest('#mergeBtn')){
+    const inp=document.getElementById('ioIn'), msg=document.getElementById('ioMsg');
+    let n=0, bad=false;
+    try{ n=mergeKV(JSON.parse(inp.value.trim())); }catch(err){ bad=true; }
+    if(bad){ msg.textContent='붙여넣은 내용을 읽을 수 없습니다. 전체를 다시 복사해 주세요.'; return; }
+    inp.value='';
+    render();
+    const m=document.getElementById('ioMsg');
+    if(m) m.textContent = n ? n+'개 항목을 합쳤습니다.' : '새로 합칠 내용이 없었습니다.';
+    return;
+  }
+});
+
+(async()=>{
+  await loadLocal();
+  const r=QS.get('me'); if(r==='dad'||r==='son') ME.role=r;
+  stamp();
+  if(!ME.role){const gate=document.getElementById('gate');gate.style.display='';gate.hidden=false;ME.role='dad';}
+  render();
+  /* 한 번 열어두면 통신이 없는 곳에서도 열립니다 */
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+  }
+})();
+</script>
+</body>
+</html>
