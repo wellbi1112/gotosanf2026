@@ -35,6 +35,7 @@ button{font-family:inherit}
 .gate{position:fixed;inset:0;z-index:80;background:var(--pine);color:#F2F3EE;
   display:flex;flex-direction:column;justify-content:center;padding:26px;overflow-y:auto}
 .gate[hidden]{display:none}
+.gate .gate-hero{width:min(100%,420px);aspect-ratio:1/1;object-fit:cover;border-radius:22px;margin:0 0 20px;box-shadow:0 16px 38px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.16)}
 .gate h1{font-family:var(--disp);font-weight:900;font-size:30px;line-height:1.12;margin:0 0 6px}
 .gate p{color:#BFCDC5;font-size:14px;margin:0 0 26px}
 .gate .pick{display:grid;gap:12px;max-width:420px}
@@ -262,6 +263,7 @@ details.spot .body{padding:0 15px 15px}
 <body>
 
 <div class="gate" id="gate" hidden>
+  <img class="gate-hero" src="icon-512.png" alt="California Trip 2026 — 아빠와 아들의 자전거 여행">
   <h1>아빠와 아들,<br>캘리포니아 9일</h1>
   <p>이 폰은 누가 쓰나요? 보이는 화면이 달라집니다.<br>나중에 상단 배지를 눌러 바꿀 수 있습니다.</p>
   <div class="pick">
